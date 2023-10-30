@@ -1,0 +1,7 @@
+**/*.js
+node_modules
+/src/react-app-env.d.ts
+*.js
+.next
+**/*.mdx
+**/*.png
