@@ -1,15 +1,19 @@
 'use client';
 
-import { LoginOutlined } from '@ant-design/icons';
-import { Flex, Layout, Menu } from 'antd';
-import Text from 'antd/es/typography/Text';
+import { Button, Flex, Layout, Menu, MenuProps } from 'antd';
 import Title from 'antd/es/typography/Title';
 import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
 
-const MENU = [
-  { name: 'Master Dashboard', href: '/' },
-  { name: 'Profile List', href: '/profiles' },
+const items: MenuProps['items'] = [
+  {
+    label: <Link href='/profiles'>Master Dashboard</Link>,
+    key: 'dashboard',
+  },
+  {
+    label: <Link href='/profiles'>Profile List</Link>,
+    key: 'profiles',
+  },
 ];
 
 export function Header() {
@@ -24,33 +28,25 @@ export function Header() {
         width: '100%',
         display: 'flex',
         alignItems: 'center',
+        justifyContent: 'space-between',
       }}
+      className='border-b'
     >
-      <div className='demo-logo' />
-      <Title level={4} className='mb-0 mr-3 text-white'>
+      <Title level={4} className='mb-0 mr-3'>
         SANTA LOGO
       </Title>
 
-      <Menu
-        theme='dark'
-        mode='horizontal'
-        className='ml-12'
-        items={MENU.map((e, index) => {
-          const key = index + 1;
-          return {
-            key,
-            label: <Link href={{ href: e.href }}>{e.name}</Link>,
-            href: e.href,
-          };
-        })}
-      />
-
       {session.status === 'authenticated' && (
-        <Flex align='center' className='ml-auto'>
-          <Text className='mb-0 mr-3 text-white'>Hello, {session.data.user?.name}</Text>
-          <button className='flex items-center' onClick={() => signOut()}>
-            <LoginOutlined style={{ fontSize: '24px' }} className='mb-0 mr-3 text-white' />
-          </button>
+        <Flex align='center' justify='end' className='flex-1'>
+          <Menu
+            mode='horizontal'
+            items={items}
+            defaultSelectedKeys={['dashboard']}
+            className='j mr-8 flex flex-1 justify-end'
+          />
+          <Button onClick={() => signOut()} className='px-10'>
+            Log out
+          </Button>
         </Flex>
       )}
     </Layout.Header>

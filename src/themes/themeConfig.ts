@@ -6,7 +6,8 @@ const theme: ThemeConfig = {
   },
   components: {
     Layout: {
-      bodyBg: '#F9F9FC',
+      headerBg: '#ffffff',
+      bodyBg: '#ffffff',
     },
     Collapse: {
       contentPadding: '0 16px',
