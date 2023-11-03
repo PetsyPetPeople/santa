@@ -1,7 +1,8 @@
 'use client';
 
-import { Statistic } from '@/components';
+import { DateRange, Statistic } from '@/components';
 import { ArrowUpOutlined } from '@ant-design/icons';
+import { Flex, Typography } from 'antd';
 import { Fragment } from 'react';
 import { InfoCard } from './profiles/components';
 
@@ -12,17 +13,26 @@ const INFO_MOCK_DATA = [
   { content: 'Average Touch points', title: '10' },
 ];
 
+const { Text } = Typography;
+
 export default function HomePage() {
   return (
     <Fragment>
-      <Statistic
-        title='Total Leads'
-        value={10000}
-        precision={16}
-        prefix={<ArrowUpOutlined />}
-        suffix='%'
-        text='this month'
-      />
+      <Flex align='center' justify='space-between'>
+        <Statistic
+          title='Total Leads'
+          value={10000}
+          precision={16}
+          prefix={<ArrowUpOutlined />}
+          suffix='%'
+          text='this month'
+        />
+
+        <Flex vertical>
+          <Text className='mb-2 text-[#9494A3]'>Date Range</Text>
+          <DateRange />
+        </Flex>
+      </Flex>
       <InfoCard data={INFO_MOCK_DATA} className='mt-16' />
     </Fragment>
   );
