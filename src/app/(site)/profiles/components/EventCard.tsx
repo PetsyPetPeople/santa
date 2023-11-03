@@ -45,7 +45,7 @@ export const EventCard = () => {
 
     if (position) {
       const top = Math.ceil(position?.top) - 234 + window.scrollY;
-      const left = Math.ceil(position?.left) - 102;
+      const left = Math.ceil(position?.left) - 132;
 
       setPosition({ top, left });
     }
@@ -69,24 +69,29 @@ export const EventCard = () => {
                 />
                 <Icon name={item.id as IconName} className='relative z-20' />
 
-                <Flex
-                  id={`event-${index}`}
-                  ref={(element) => (refTarget.current[index] = element)}
-                  vertical
-                  align='center'
-                  className='popup w-[64px] rounded-xl bg-white p-[20px_6px_16px_6px] shadow-[0px_3px_24px_0px_#0000001A]'
-                >
-                  <Text
-                    className={clsx('mb-1 text-xl', !isNull(item.count) ? 'text-[#EE4D52]' : 'text-[#9494A3]')}
-                  >{`$${item.value || '?'}`}</Text>
-                  <Text className='mb-1 text-sm text-[#9494A3]'>{item.count ? `Touch ${item.count}` : '...'}</Text>
+                {openId !== index && (
+                  <Flex
+                    id={`event-${index}`}
+                    ref={(element) => (refTarget.current[index] = element)}
+                    vertical
+                    align='center'
+                    className='popup w-[64px] rounded-xl bg-white p-[20px_6px_16px_6px] shadow-[0px_3px_24px_0px_#0000001A]'
+                  >
+                    <Text
+                      className={clsx('mb-1 text-xl', !isNull(item.count) ? 'text-[#EE4D52]' : 'text-[#9494A3]')}
+                    >{`$${item.value || '?'}`}</Text>
+                    <Text className='mb-1 text-sm text-[#9494A3]'>{item.count ? `Touch ${item.count}` : '...'}</Text>
 
-                  {!!item.count && (
-                    <div className='flex w-[20px] cursor-pointer justify-center pt-2' onClick={() => handleOpen(index)}>
-                      <Icon name='arrow-down' width={12} height={8} />
-                    </div>
-                  )}
-                </Flex>
+                    {!!item.count && (
+                      <div
+                        className='flex w-[20px] cursor-pointer justify-center pt-2'
+                        onClick={() => handleOpen(index)}
+                      >
+                        <Icon name='arrow-down' width={12} height={8} />
+                      </div>
+                    )}
+                  </Flex>
+                )}
               </Flex>
             </div>
           ))}
