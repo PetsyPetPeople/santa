@@ -63,7 +63,7 @@ const data: DataType[] = [
     costToDate: 100,
     firstTouchPoint: '5 FEB 2023',
     lastTouchPoint: '10 MAR 2023',
-    status: 'Hard',
+    status: 'Hot',
   },
   {
     key: '2',
@@ -71,7 +71,7 @@ const data: DataType[] = [
     costToDate: 100,
     firstTouchPoint: '5 FEB 2023',
     lastTouchPoint: '10 MAR 2023',
-    status: 'Hard',
+    status: 'Hot',
   },
   {
     key: '3',
@@ -79,7 +79,7 @@ const data: DataType[] = [
     costToDate: 100,
     firstTouchPoint: '5 FEB 2023',
     lastTouchPoint: '10 MAR 2023',
-    status: 'Sort',
+    status: 'Cold',
   },
   {
     key: '4',
@@ -87,7 +87,7 @@ const data: DataType[] = [
     costToDate: 100,
     firstTouchPoint: '5 FEB 2023',
     lastTouchPoint: '10 MAR 2023',
-    status: 'Hard',
+    status: 'Hot',
   },
   {
     key: '5',
@@ -95,7 +95,7 @@ const data: DataType[] = [
     costToDate: 100,
     firstTouchPoint: '5 FEB 2023',
     lastTouchPoint: '10 MAR 2023',
-    status: 'Hard',
+    status: 'Hot',
   },
   {
     key: '6',
@@ -103,7 +103,7 @@ const data: DataType[] = [
     costToDate: 100,
     firstTouchPoint: '5 FEB 2023',
     lastTouchPoint: '10 MAR 2023',
-    status: 'Sort',
+    status: 'Cold',
   },
   {
     key: '7',
@@ -111,7 +111,7 @@ const data: DataType[] = [
     costToDate: 100,
     firstTouchPoint: '5 FEB 2023',
     lastTouchPoint: '10 MAR 2023',
-    status: 'Hard',
+    status: 'Hot',
   },
   {
     key: '8',
@@ -119,7 +119,7 @@ const data: DataType[] = [
     costToDate: 100,
     firstTouchPoint: '5 FEB 2023',
     lastTouchPoint: '10 MAR 2023',
-    status: 'Hard',
+    status: 'Hot',
   },
   {
     key: '9',
@@ -127,7 +127,7 @@ const data: DataType[] = [
     costToDate: 100,
     firstTouchPoint: '5 FEB 2023',
     lastTouchPoint: '10 MAR 2023',
-    status: 'Sort',
+    status: 'Cold',
   },
   {
     key: '10',
@@ -135,7 +135,7 @@ const data: DataType[] = [
     costToDate: 100,
     firstTouchPoint: '5 FEB 2023',
     lastTouchPoint: '10 MAR 2023',
-    status: 'Hard',
+    status: 'Hot',
   },
   {
     key: '11',
@@ -143,7 +143,7 @@ const data: DataType[] = [
     costToDate: 100,
     firstTouchPoint: '5 FEB 2023',
     lastTouchPoint: '10 MAR 2023',
-    status: 'Hard',
+    status: 'Hot',
   },
   {
     key: '12',
@@ -151,7 +151,7 @@ const data: DataType[] = [
     costToDate: 100,
     firstTouchPoint: '5 FEB 2023',
     lastTouchPoint: '10 MAR 2023',
-    status: 'Sort',
+    status: 'Cold',
   },
 ];
 

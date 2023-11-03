@@ -25,7 +25,7 @@ export default function ProfilesPage() {
         <Col span={8}>
           <Card>
             <Statistic
-              title='Hard Leads'
+              title='Hot Leads'
               value={5500}
               precision={2}
               prefix={<ArrowUpOutlined />}
@@ -37,7 +37,7 @@ export default function ProfilesPage() {
         <Col span={8}>
           <Card>
             <Statistic
-              title='Soft Leads'
+              title='Cold Leads'
               value={4500}
               precision={-3}
               prefix={<ArrowDownOutlined />}

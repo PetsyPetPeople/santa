@@ -5,6 +5,12 @@ import { Col, Row } from 'antd';
 import { Fragment } from 'react';
 import { EventCard, InfoCard, PieChartCard } from '../../components';
 
+const INFO_MOCK_DATA = [
+  { content: 'Lead Status', title: 'Hot' },
+  { content: 'Touch Points', title: '6' },
+  { content: 'Journey Cost', title: '$600' },
+];
+
 export default function ProfilePage() {
   return (
     <Fragment>
@@ -16,7 +22,7 @@ export default function ProfilePage() {
           <PieChartCard />
         </Col>
         <Col span={12}>
-          <InfoCard />
+          <InfoCard data={INFO_MOCK_DATA} />
         </Col>
       </Row>
     </Fragment>
