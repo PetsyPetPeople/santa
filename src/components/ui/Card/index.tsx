@@ -13,7 +13,7 @@ export function Card({ ref, children, bodyStyle, className, ...props }: CardProp
     <AntCard
       ref={ref}
       bordered={false}
-      bodyStyle={{ backgroundColor: '#F9F9FC', borderRadius: 20, ...bodyStyle }}
+      bodyStyle={{ backgroundColor: '#F9F9FC', borderRadius: 30, ...bodyStyle }}
       className={clsx('rounded-[20px]', className)}
       {...props}
     >

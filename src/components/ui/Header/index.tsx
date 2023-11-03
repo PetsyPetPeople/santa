@@ -2,12 +2,15 @@
 
 import { Icon } from '@/components';
 import { Button, Flex, Layout, Menu, MenuProps } from 'antd';
-import Title from 'antd/es/typography/Title';
 import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useSelectedLayoutSegment } from 'next/navigation';
 
 const items: MenuProps['items'] = [
+  {
+    label: <Link href='/source-map'>Source Map</Link>,
+    key: 'source-map',
+  },
   {
     label: <Link href='/'>Master Dashboard</Link>,
     key: 'dashboard',
@@ -25,9 +28,9 @@ export function Header() {
 
   return (
     <Layout.Header className='sticky top-0 z-50 flex w-full items-center justify-between border-b'>
-      <Title level={4} className='mb-0 mr-3'>
+      <Link href='/'>
         <Icon name='logo' width={140} height={42} />
-      </Title>
+      </Link>
 
       {session.status === 'authenticated' && (
         <Flex align='center' justify='end' className='flex-1'>

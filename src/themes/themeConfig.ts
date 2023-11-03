@@ -4,7 +4,7 @@ const theme: ThemeConfig = {
   token: {
     colorPrimary: '#EE4D52',
     fontSize: 16,
-    borderRadius: 30,
+    borderRadius: 10,
   },
   components: {
     Layout: {
@@ -22,6 +22,12 @@ const theme: ThemeConfig = {
     },
     Menu: {
       itemPaddingInline: 30,
+    },
+    Table: {
+      headerBg: '#f9f9fc',
+      headerColor: '#9494A3',
+      cellFontSize: 14,
+      borderColor: '#E8E7F3',
     },
   },
 };

@@ -1,10 +1,8 @@
 'use client';
 
-import { Button, Card } from '@/components';
-import { SearchOutlined } from '@ant-design/icons';
-import { Flex, Input, Select, Space, Table, Typography } from 'antd';
+import { Card, Flex, Select, Space, Table, Typography } from 'antd';
 import { ColumnsType } from 'antd/es/table';
-import clsx from 'clsx';
+import Link from 'next/link';
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -23,32 +21,26 @@ const columns: ColumnsType<DataType> = [
     title: 'Lead Name',
     dataIndex: 'leadName',
     key: 'leadName',
-    className: 'font-light',
   },
   {
     title: 'Cost to Date',
     dataIndex: 'costToDate',
     key: 'costToDate',
-    className: 'font-light',
   },
   {
     title: 'First Touch Point',
     dataIndex: 'firstTouchPoint',
     key: 'firstTouchPoint',
-    className: 'font-light',
   },
   {
     title: 'Last Touch Point',
     dataIndex: 'lastTouchPoint',
     key: 'lastTouchPoint',
-    className: 'font-light',
   },
   {
     title: 'Status',
     dataIndex: 'status',
     key: 'status',
-    className: 'font-light',
-    render: (_, record) => <span className={clsx(record.status === 'Hot' && 'text-[#F05858]')}>{record.status}</span>,
   },
 
   {
@@ -57,9 +49,7 @@ const columns: ColumnsType<DataType> = [
     className: 'text-center',
     render: (_, record) => (
       <Space size='middle'>
-        <Button buttonType='link' href={`/profiles/${record.key}`}>
-          View Attribution
-        </Button>
+        <Link href={`/profiles/${record.key}`}>View Attribution</Link>
       </Space>
     ),
   },
@@ -164,28 +154,15 @@ const data: DataType[] = [
   },
 ];
 
-export const ProfileList = () => {
+export const SourceList = () => {
   return (
     <Card bodyStyle={{ padding: 48 }}>
       <Flex align='center' justify='space-between' className='mb-8 w-full'>
         <Title level={2} className='mb-0'>
-          All Leads
+          Source / Landing Map
         </Title>
-        <Space>
-          <Input
-            size='large'
-            className='w-[215px] rounded-[10px] bg-white text-sm'
-            placeholder='Search'
-            prefix={<SearchOutlined style={{ color: '#7E7E7E' }} />}
-          />
-          <Select size='large' placeholder='Short by : Newest' className='w-[170px] '>
-            <Option value='Newest' className='rounded-[10px] bg-white text-sm'>
-              Newest
-            </Option>
-          </Select>
-        </Space>
       </Flex>
-      <Table rowClassName='bg-[#f9f9fc]' columns={columns} dataSource={data} footer={() => 'Footer'} />
+      <Table columns={columns} dataSource={data} />
     </Card>
   );
 };

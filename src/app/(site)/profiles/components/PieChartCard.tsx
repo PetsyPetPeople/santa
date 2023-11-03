@@ -35,7 +35,7 @@ export const PieChartCard = () => {
               <Badge
                 key={index}
                 color={COLORS[index % COLORS.length]}
-                text={<span className='ml-1 font-light text-[#9494A3]'>{item.name}</span>}
+                text={<span className='ml-1 text-[#9494A3]'>{item.name}</span>}
                 className='my-1 w-1/2'
               />
             ))}

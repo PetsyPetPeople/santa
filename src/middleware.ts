@@ -8,5 +8,5 @@ export default withAuth({
 });
 
 export const config = {
-  matcher: ['/', '/profiles/:path*'],
+  matcher: ['/', '/profiles/:path*', '/source-map'],
 };

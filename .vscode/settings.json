@@ -19,5 +19,6 @@
   },
   "[xml]": {
     "editor.defaultFormatter": "redhat.vscode-xml"
-  }
+  },
+  "editor.suggest.snippetsPreventQuickSuggestions": true
 }

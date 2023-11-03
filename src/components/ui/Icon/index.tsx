@@ -13,11 +13,14 @@ export type IconName =
   | 'tiktok'
   | 'lose'
   | 'unknown'
+  | 'users'
+  | 'user-active'
+  | 'user-question'
   | 'win';
 
 interface IconProps {
   name: IconName;
-  size?: 'sm' | 'md' | 'lg' | 'xl';
+  size?: 'sm' | 'md' | 'lg';
   width?: number;
   height?: number;
   className?: string;
@@ -25,10 +28,9 @@ interface IconProps {
 
 export const Icon: React.FC<IconProps> = ({ name, width, height, size = 'md', className }) => {
   const sizeToDimensions = {
-    sm: { width: 12, height: 12 },
-    md: { width: 76, height: 76 },
-    lg: { width: 22, height: 22 },
-    xl: { width: 28, height: 28 },
+    sm: { width: 24, height: 24 },
+    md: { width: 48, height: 48 },
+    lg: { width: 76, height: 76 },
   };
 
   if (!width && !height) {
@@ -39,7 +41,5 @@ export const Icon: React.FC<IconProps> = ({ name, width, height, size = 'md', cl
     }
   }
 
-  return (
-    <Image loading='lazy' src={`/icons/${name}.svg`} alt={name} width={width} height={height} className={className} />
-  );
+  return <Image priority src={`/icons/${name}.svg`} alt={name} width={width} height={height} className={className} />;
 };

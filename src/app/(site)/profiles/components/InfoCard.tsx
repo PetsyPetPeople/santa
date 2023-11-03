@@ -33,7 +33,7 @@ export const InfoCard = ({ data, bodyStyle, className, ...props }: InfoCardProps
                 <Title level={2} className='mb-1 text-[32px] text-[#2D2D31]'>
                   {item.title}
                 </Title>
-                <Text className='text-base font-light text-[#9494A3]'>{item.content}</Text>
+                <Text className='text-base text-[#9494A3]'>{item.content}</Text>
               </Flex>
               {index !== data.length - 1 && <Divider type='vertical' className='h-[70px] border-[#DBDBDB]' />}
             </Fragment>

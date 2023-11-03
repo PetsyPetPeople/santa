@@ -67,7 +67,7 @@ export const EventCard = () => {
                     !isNull(item.count) ? 'bg-[#EE4D52]' : 'bg-[#CDCBDB]',
                   )}
                 />
-                <Icon name={item.id as IconName} className='relative z-20' />
+                <Icon name={item.id as IconName} size='lg' className='relative z-20' />
 
                 {openId !== index && (
                   <Flex
