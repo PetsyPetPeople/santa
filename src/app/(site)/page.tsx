@@ -1,7 +1,17 @@
 'use client';
 
-import Title from 'antd/es/typography/Title';
+import { Statistic } from '@/components';
+import { ArrowUpOutlined } from '@ant-design/icons';
 
 export default function HomePage() {
-  return <Title level={2}>Home page</Title>;
+  return (
+    <Statistic
+      title='Total Leads'
+      value={10000}
+      precision={16}
+      prefix={<ArrowUpOutlined />}
+      suffix='%'
+      text='this month'
+    />
+  );
 }

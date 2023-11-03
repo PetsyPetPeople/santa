@@ -9,7 +9,6 @@ export const graphqlBaseQuery = graphqlRequestBaseQuery({
   url: GRAPHQL_API_URL,
   prepareHeaders: async (headers) => {
     const session = await getSession();
-    console.log('session :>> ', session);
 
     if (session?.backendTokens) {
       headers.set('Authorization', `Bearer ${session.backendTokens.accessToken}`);

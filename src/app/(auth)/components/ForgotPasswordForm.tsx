@@ -36,7 +36,6 @@ export const ForgotPasswordForm = () => {
       redirect: false,
     })
       .then((callback) => {
-        console.log('callback :>> ', callback);
         if (callback?.error) {
           toast.error('Invalid credentials!');
         }

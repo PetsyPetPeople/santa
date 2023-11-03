@@ -1,13 +1,15 @@
 'use client';
 
+import { Icon } from '@/components';
 import { Button, Flex, Layout, Menu, MenuProps } from 'antd';
 import Title from 'antd/es/typography/Title';
 import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
+import { useSelectedLayoutSegment } from 'next/navigation';
 
 const items: MenuProps['items'] = [
   {
-    label: <Link href='/profiles'>Master Dashboard</Link>,
+    label: <Link href='/'>Master Dashboard</Link>,
     key: 'dashboard',
   },
   {
@@ -18,32 +20,18 @@ const items: MenuProps['items'] = [
 
 export function Header() {
   const session = useSession();
+  const activeSegment = useSelectedLayoutSegment();
+  const activeMenu = !activeSegment ? 'dashboard' : activeSegment || '';
 
   return (
-    <Layout.Header
-      style={{
-        position: 'sticky',
-        top: 0,
-        zIndex: 1,
-        width: '100%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-      }}
-      className='border-b'
-    >
+    <Layout.Header className='sticky top-0 z-50 flex w-full items-center justify-between border-b'>
       <Title level={4} className='mb-0 mr-3'>
-        SANTA LOGO
+        <Icon name='logo' width={140} height={42} />
       </Title>
 
       {session.status === 'authenticated' && (
         <Flex align='center' justify='end' className='flex-1'>
-          <Menu
-            mode='horizontal'
-            items={items}
-            defaultSelectedKeys={['dashboard']}
-            className='j mr-8 flex flex-1 justify-end'
-          />
+          <Menu mode='horizontal' items={items} selectedKeys={[activeMenu]} className='mr-8 flex flex-1 justify-end' />
           <Button onClick={() => signOut()} className='px-10'>
             Log out
           </Button>

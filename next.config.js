@@ -7,12 +7,9 @@ const nextConfig = {
     styledComponents: true,
   },
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '**.tmdb.org',
-      },
-    ],
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
 };
 
