@@ -1,9 +1,9 @@
 'use client';
 
-import { ProfileCard } from '@/components';
-import { Col, Row } from 'antd';
+import { Button, InfoCard, ProfileCard } from '@/components';
+import { Col, Flex, Row } from 'antd';
 import { Fragment } from 'react';
-import { EventCard, InfoCard, PieChartCard } from '../../components';
+import { EventCard, PieChartCard } from '../../components';
 
 const INFO_MOCK_DATA = [
   { content: 'Lead Status', title: 'Hot' },
@@ -14,7 +14,14 @@ const INFO_MOCK_DATA = [
 export default function ProfilePage() {
   return (
     <Fragment>
-      <ProfileCard />
+      <Flex align='center' justify='space-between'>
+        <ProfileCard />
+
+        <Button buttonType='button' href='/'>
+          User Journey
+        </Button>
+      </Flex>
+
       <EventCard />
 
       <Row gutter={24}>

@@ -10,6 +10,7 @@ export type IconName =
   | 'instagram'
   | 'logo'
   | 'mail'
+  | 'money'
   | 'tiktok'
   | 'lose'
   | 'unknown'

@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { FC } from 'react';
 
 interface ButtonProps extends Omit<AntButtonProps, 'href'> {
-  buttonType: 'button' | 'link';
+  buttonType?: 'button' | 'link';
   href: any;
 }
 

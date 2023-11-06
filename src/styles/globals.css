@@ -76,3 +76,14 @@ body {
     transform: translate(0, 0);
   }
 }
+
+.vertical-card {
+  fill: #fff;
+  filter: drop-shadow(0 10px 60px rgba(199, 207, 218, 5%));
+
+  @apply w-[400px] rounded-[30px] bg-white px-[36px] py-[24px];
+}
+
+.text {
+  @apply !text-sm !text-[#9494A3];
+}

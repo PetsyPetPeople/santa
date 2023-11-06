@@ -8,9 +8,9 @@ import clsx from 'clsx';
 import { isEmpty } from 'lodash';
 import { Fragment } from 'react';
 
-interface InfoItem {
+export interface InfoItem {
   title: string;
-  content: string;
+  content: string | number;
 }
 
 interface InfoCardProps extends CardProps {

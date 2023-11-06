@@ -192,7 +192,7 @@ export const ProfileList = () => {
             prefix={<SearchOutlined style={{ fontSize: 20, color: '#7E7E7E' }} />}
           />
 
-          <Select size='large' placeholder='Short by' className='w-[170px] '>
+          <Select size='large' placeholder='Short bycon' className='w-[170px] '>
             {items.map((item) => (
               <Option key={item?.key} value={item.key} className='rounded-[10px] bg-white text-sm'>
                 {item.label}
