@@ -1,6 +1,5 @@
 import AuthProvider from '@/app/(auth)/AuthProvider';
-import ToasterProvider from '@/libs/ToastProvider';
-import { AntdStyleProvider } from '@/libs/antd/AntdStyleProvider';
+import { AntStyleProvider } from '@/libs/antd/AntStyleProvider';
 import ReduxProvider from '@/libs/redux/provider';
 import '@/styles/globals.css';
 import type { Metadata } from 'next';
@@ -17,12 +16,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang='en'>
       <body className={inter.className}>
-        <AuthProvider>
-          <ReduxProvider>
-            <AntdStyleProvider>{children}</AntdStyleProvider>
-          </ReduxProvider>
-          <ToasterProvider />
-        </AuthProvider>
+        <AntStyleProvider>
+          <AuthProvider>
+            <ReduxProvider>{children}</ReduxProvider>
+          </AuthProvider>
+        </AntStyleProvider>
       </body>
     </html>
   );

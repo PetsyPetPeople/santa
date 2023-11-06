@@ -4,7 +4,7 @@ import { StyleProvider, createCache, extractStyle } from '@ant-design/cssinjs';
 import { useServerInsertedHTML } from 'next/navigation';
 import { useState, type PropsWithChildren } from 'react';
 
-export const AntdProvider = ({ children }: PropsWithChildren) => {
+export const AntProvider = ({ children }: PropsWithChildren) => {
   const [cache] = useState(() => createCache());
 
   useServerInsertedHTML(() => {

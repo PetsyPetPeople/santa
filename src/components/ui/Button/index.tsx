@@ -13,7 +13,10 @@ interface ButtonProps extends Omit<AntButtonProps, 'href'> {
 export const Button: FC<ButtonProps> = ({ children, href, buttonType = 'link', className, ...props }) => {
   return buttonType === 'link' && href ? (
     <Link href={href} passHref legacyBehavior>
-      <AntButton className={clsx('text-md cursor-pointer border-0 pt-[5px] shadow-md', className)} {...props}>
+      <AntButton
+        className={clsx('text-md cursor-pointer border-0 pt-[4px] text-[#2D2D31] hover:shadow-md', className)}
+        {...props}
+      >
         View Attribution
       </AntButton>
     </Link>

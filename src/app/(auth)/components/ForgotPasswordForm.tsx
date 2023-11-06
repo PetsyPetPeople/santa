@@ -1,5 +1,6 @@
 'use client';
 
+import { useApp } from '@/hooks';
 import { UserOutlined } from '@ant-design/icons';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Card, Form, Input, Typography } from 'antd';
@@ -10,7 +11,6 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { FormItem } from 'react-hook-form-antd';
-import { toast } from 'react-toastify';
 import * as z from 'zod';
 
 const { Title } = Typography;
@@ -21,6 +21,7 @@ const schema = z.object({
 });
 
 export const ForgotPasswordForm = () => {
+  const { message } = useApp();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -37,7 +38,7 @@ export const ForgotPasswordForm = () => {
     })
       .then((callback) => {
         if (callback?.error) {
-          toast.error('Invalid credentials!');
+          message.error('Invalid credentials!');
         }
 
         if (callback?.ok) {

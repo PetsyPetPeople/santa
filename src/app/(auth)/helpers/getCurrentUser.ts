@@ -4,7 +4,6 @@ import { getServerSession } from 'next-auth';
 const getCurrentUser = async () => {
   try {
     const session = await getServerSession(authOptions);
-    console.log('getCurrentUser :>> ', session);
 
     if (!session?.user?.email) {
       return null;

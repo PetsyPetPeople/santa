@@ -29,7 +29,7 @@ export default function HomePage() {
         />
 
         <Flex vertical>
-          <Text className='mb-2 text-[#9494A3]'>Date Range</Text>
+          <Text className='mb-2'>Date Range</Text>
           <DateRange />
         </Flex>
       </Flex>

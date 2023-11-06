@@ -5,6 +5,10 @@ const theme: ThemeConfig = {
     colorPrimary: '#EE4D52',
     fontSize: 16,
     borderRadius: 10,
+    colorText: '#2D2D31',
+    colorTextHeading: '#2D2D31',
+    fontWeightStrong: 400,
+    fontSizeLG: 14,
   },
   components: {
     Layout: {
@@ -26,8 +30,13 @@ const theme: ThemeConfig = {
     Table: {
       headerBg: '#f9f9fc',
       headerColor: '#9494A3',
+      footerBg: '#F9F9FC',
       cellFontSize: 14,
       borderColor: '#E8E7F3',
+      footerColor: '#9494A3',
+    },
+    Pagination: {
+      itemActiveBg: 'black',
     },
   },
 };

@@ -1,8 +1,9 @@
 'use client';
 
 import { Button, Card } from '@/components';
+import { Table } from '@/components/ui/Table';
 import { SearchOutlined } from '@ant-design/icons';
-import { Flex, Input, Select, Space, Table, Typography } from 'antd';
+import { Flex, Input, Select, Space, Typography } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import clsx from 'clsx';
 
@@ -17,6 +18,17 @@ interface DataType {
   lastTouchPoint: string;
   status: string;
 }
+
+const items = [
+  {
+    label: 'Newest',
+    key: 'newest',
+  },
+  {
+    label: 'Oldest',
+    key: 'oldest',
+  },
+];
 
 const columns: ColumnsType<DataType> = [
   {
@@ -55,9 +67,10 @@ const columns: ColumnsType<DataType> = [
     title: '',
     key: 'action',
     className: 'text-center',
+    width: 150,
     render: (_, record) => (
       <Space size='middle'>
-        <Button buttonType='link' href={`/profiles/${record.key}`}>
+        <Button buttonType='link' href={`/profiles/${record.key}`} className='button'>
           View Attribution
         </Button>
       </Space>
@@ -166,8 +179,8 @@ const data: DataType[] = [
 
 export const ProfileList = () => {
   return (
-    <Card bodyStyle={{ padding: 48 }}>
-      <Flex align='center' justify='space-between' className='mb-8 w-full'>
+    <Card bodyStyle={{ padding: 48, paddingBottom: 24 }}>
+      <Flex align='center' justify='space-between' className='mb-8 w-full px-4'>
         <Title level={2} className='mb-0'>
           All Leads
         </Title>
@@ -176,16 +189,20 @@ export const ProfileList = () => {
             size='large'
             className='w-[215px] rounded-[10px] bg-white text-sm'
             placeholder='Search'
-            prefix={<SearchOutlined style={{ color: '#7E7E7E' }} />}
+            prefix={<SearchOutlined style={{ fontSize: 20, color: '#7E7E7E' }} />}
           />
-          <Select size='large' placeholder='Short by : Newest' className='w-[170px] '>
-            <Option value='Newest' className='rounded-[10px] bg-white text-sm'>
-              Newest
-            </Option>
+
+          <Select size='large' placeholder='Short by' className='w-[170px] '>
+            {items.map((item) => (
+              <Option key={item?.key} value={item.key} className='rounded-[10px] bg-white text-sm'>
+                {item.label}
+              </Option>
+            ))}
           </Select>
         </Space>
       </Flex>
-      <Table rowClassName='bg-[#f9f9fc]' columns={columns} dataSource={data} footer={() => 'Footer'} />
+
+      <Table columns={columns} data={data} />
     </Card>
   );
 };
