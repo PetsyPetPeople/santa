@@ -1,11 +1,9 @@
 'use client';
 
-import { Button, Card } from '@/components';
-import { Table } from '@/components/ui/Table';
+import { Button, Card, Table } from '@/components';
 import { SearchOutlined } from '@ant-design/icons';
-import { Flex, Input, Select, Space, Typography } from 'antd';
+import { Flex, Input, Select, Space, Tag, Typography } from 'antd';
 import { ColumnsType } from 'antd/es/table';
-import clsx from 'clsx';
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -60,7 +58,11 @@ const columns: ColumnsType<DataType> = [
     dataIndex: 'status',
     key: 'status',
     className: 'font-light',
-    render: (_, record) => <span className={clsx(record.status === 'Hot' && 'text-[#F05858]')}>{record.status}</span>,
+    render: (_, record) => (
+      <Tag className='text-sm' color={record.status === 'Hot' ? '#F05858' : undefined}>
+        {record.status}
+      </Tag>
+    ),
   },
 
   {
@@ -70,7 +72,7 @@ const columns: ColumnsType<DataType> = [
     width: 150,
     render: (_, record) => (
       <Space size='middle'>
-        <Button buttonType='link' href={`/profiles/${record.key}`} className='button'>
+        <Button buttonType='link' href={`/profiles/${record.key}`} className='button pt-[5px]'>
           View Attribution
         </Button>
       </Space>
@@ -186,15 +188,14 @@ export const ProfileList = () => {
         </Title>
         <Space>
           <Input
-            size='large'
-            className='w-[215px] rounded-[10px] bg-white text-sm'
+            className='w-[215px] rounded-[10px] bg-white'
             placeholder='Search'
             prefix={<SearchOutlined style={{ fontSize: 20, color: '#7E7E7E' }} />}
           />
 
-          <Select size='large' placeholder='Short bycon' className='w-[170px] '>
+          <Select placeholder='Short by' className='w-[170px]'>
             {items.map((item) => (
-              <Option key={item?.key} value={item.key} className='rounded-[10px] bg-white text-sm'>
+              <Option key={item?.key} value={item.key} className='rounded-[10px] bg-white'>
                 {item.label}
               </Option>
             ))}

@@ -4,6 +4,7 @@ import React from 'react';
 export type IconName =
   | 'arrow-down'
   | 'canstar'
+  | 'checked'
   | 'facebook'
   | 'google'
   | 'hat'
@@ -11,6 +12,8 @@ export type IconName =
   | 'logo'
   | 'mail'
   | 'money'
+  | 'mouse'
+  | 'platform'
   | 'tiktok'
   | 'lose'
   | 'unknown'
@@ -42,5 +45,7 @@ export const Icon: React.FC<IconProps> = ({ name, width, height, size = 'md', cl
     }
   }
 
-  return <Image priority src={`/icons/${name}.svg`} alt={name} width={width} height={height} className={className} />;
+  return (
+    <Image src={`/icons/${name}.svg`} alt={name} width={width} height={height} loading='lazy' className={className} />
+  );
 };

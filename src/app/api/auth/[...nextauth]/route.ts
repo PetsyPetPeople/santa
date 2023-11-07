@@ -34,8 +34,8 @@ export const authOptions: AuthOptions = {
 
       async authorize(credentials) {
         const user = {
-          email: 'santa123@domain.com',
-          password: 'santa@123',
+          email: 'dan.t@petsy.com.au',
+          password: 'dan@123',
         };
 
         if (credentials?.email === user.email && credentials?.password === user.password) {

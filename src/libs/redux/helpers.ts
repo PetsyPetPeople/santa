@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { EntityError } from './types';
 

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { GRAPHQL_API_URL, GRAPHQL_API_URL_SERVER_MODE } from '@/configs';
 import { GraphQLClient } from 'graphql-request';
 

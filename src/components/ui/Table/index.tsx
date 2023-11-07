@@ -9,9 +9,10 @@ import { useState } from 'react';
 interface TableProps {
   columns: ColumnsType<any>;
   data: any[];
+  isScroll?: boolean;
 }
 
-export const Table = ({ columns, data }: TableProps) => {
+export const Table = ({ columns, data, isScroll = false }: TableProps) => {
   const [current, setCurrent] = useState(PAGE_CURRENT);
 
   const onChange: PaginationProps['onChange'] = (page) => {
@@ -36,6 +37,7 @@ export const Table = ({ columns, data }: TableProps) => {
         </Row>
       )}
       pagination={false}
+      scroll={isScroll ? { x: 1240 } : undefined}
     />
   );
 };

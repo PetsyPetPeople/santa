@@ -14,7 +14,7 @@ export function Card({ ref, children, bodyStyle, className, ...props }: CardProp
       ref={ref}
       bordered={false}
       bodyStyle={{ backgroundColor: '#F9F9FC', borderRadius: 30, ...bodyStyle }}
-      className={clsx('rounded-[20px]', className)}
+      className={clsx('rounded-[30px]', className)}
       {...props}
     >
       {children}

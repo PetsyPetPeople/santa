@@ -32,7 +32,7 @@ export const EventCardItem = forwardRef<EventCardItemRef, EventCardItemProps>(({
 
   return (
     <div className='flex-auto pb-5 pt-3'>
-      <Flex vertical align='center' className='relative'>
+      <Flex vertical align='center' className='relative h-full'>
         <span className={clsx('absolute top-[34px] z-10 h-[6px] w-[calc(100%-2px)]', classNameActive(true))} />
         <Icon name={item.id as IconName} size='lg' className='relative z-20' />
 
@@ -41,15 +41,15 @@ export const EventCardItem = forwardRef<EventCardItemRef, EventCardItemProps>(({
           ref={currentRef}
           vertical
           align='center'
-          className='popup w-[64px] p-[20px_6px_16px_6px]'
+          className='popup w-[75px] flex-auto p-[20px_6px_16px_6px]'
         >
           <Text className={clsx('mb-1 text-xl', classNameActive())}>{`$${item.value || '?'}`}</Text>
-          <Text className='mb-1 text-sm text-[#9494A3]'>{item.count ? `Touch ${item.count}` : '...'}</Text>
+          <Text className='mb-1 text-[#9494A3]'>{item.count ? `Touch ${item.count}` : '...'}</Text>
 
           {!!item.count && (
             <div
               ref={buttonRef}
-              className='flex w-[20px] cursor-pointer justify-center pt-2'
+              className='flex h-4 w-1/2 cursor-pointer items-end justify-center'
               onClick={() => onClick(index)}
             >
               <Icon name='arrow-down' width={12} height={8} />

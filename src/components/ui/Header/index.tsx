@@ -24,7 +24,7 @@ const items: MenuProps['items'] = [
 export function Header() {
   const session = useSession();
   const activeSegment = useSelectedLayoutSegment();
-  const activeMenu = !activeSegment ? 'dashboard' : activeSegment || '';
+  const activeMenu = !activeSegment || activeSegment === '(dashboard)' ? 'dashboard' : activeSegment || '';
 
   return (
     <Layout.Header className='sticky top-0 z-50 flex w-full items-center justify-between border-b'>

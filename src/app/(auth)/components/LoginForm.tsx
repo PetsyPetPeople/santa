@@ -14,8 +14,8 @@ import { FormItem } from 'react-hook-form-antd';
 import * as z from 'zod';
 
 const schema = z.object({
-  email: z.string().min(1, { message: 'Required' }),
-  password: z.string().min(1, { message: 'Required' }),
+  email: z.string().min(1, { message: 'This field is required' }),
+  password: z.string().min(1, { message: 'This field is required' }),
 });
 
 export const LoginForm = () => {
@@ -24,7 +24,7 @@ export const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const { control, handleSubmit } = useForm({
-    defaultValues: { email: 'santa123@domain.com', password: 'santa@123' },
+    defaultValues: { email: '', password: '' },
     resolver: zodResolver(schema),
   });
 
@@ -58,7 +58,6 @@ export const LoginForm = () => {
         <Form onFinish={handleSubmit(onSubmit)}>
           <FormItem name='email' control={control}>
             <Input
-              size='large'
               type='email'
               placeholder='Username or email'
               disabled={isLoading}
@@ -67,7 +66,6 @@ export const LoginForm = () => {
           </FormItem>
           <FormItem name='password' control={control}>
             <Input
-              size='large'
               type='password'
               placeholder='Password'
               disabled={isLoading}
@@ -77,16 +75,15 @@ export const LoginForm = () => {
           <Form.Item>
             <Button
               block
-              size='large'
               type='primary'
               htmlType='submit'
-              className='login-form-button h-[48px] text-base'
+              className='login-form-button h-[42px] text-base'
               disabled={isLoading}
             >
               HO HO GO!
             </Button>
           </Form.Item>
-          <Link href='/forgot-password' className='block text-center text-sm text-[#656589]'>
+          <Link href='/forgot-password' className='block text-center text-[#656589]'>
             Forget your password?
           </Link>
         </Form>

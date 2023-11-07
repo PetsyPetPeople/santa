@@ -79,11 +79,34 @@ body {
 
 .vertical-card {
   fill: #fff;
-  filter: drop-shadow(0 10px 60px rgba(199, 207, 218, 5%));
+  filter: drop-shadow(0 10px 60px rgba(199, 207, 218, 50%));
 
   @apply w-[400px] rounded-[30px] bg-white px-[36px] py-[24px];
 }
 
 .text {
-  @apply !text-sm !text-[#9494A3];
+  @apply !text-[#9494A3];
+}
+
+.custom-tooltip-chart {
+  @apply px-6 py-3 text-center;
+}
+
+.custom-tooltip-chart .value {
+  @apply text-[20px] text-[#F05858];
+}
+
+.custom-tooltip-chart .label {
+  @apply text-[#88889C];
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* For IE, Edge and Firefox */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  touch-action: none;
 }

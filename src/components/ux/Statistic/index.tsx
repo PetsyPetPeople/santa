@@ -9,7 +9,7 @@ import { FC } from 'react';
 
 interface StatisticProps {
   title: string;
-  value: number;
+  value: number | string | React.ReactNode;
   precision?: number;
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;
@@ -44,13 +44,13 @@ export const Statistic: FC<StatisticProps> = ({ title, value, precision, prefix,
         <Title level={3} className='mb-2 mt-0 font-normal'>
           {value}
         </Title>
-        <Flex align='center' gap={3}>
+        <Flex align='center' gap={3} className='text-xs'>
           {renderPrefix()}
-          <Text className={clsx(precision && precision >= 0 ? 'text-[#00AC4F]' : 'text-[#F05858]')}>
+          <Text className={clsx('text-xs', precision && precision >= 0 ? 'text-[#00AC4F]' : 'text-[#F05858]')}>
             {precision}
             {suffix}
           </Text>
-          <Text className='text-[#292D32]'>{text}</Text>
+          <Text className='text-xs text-[#292D32]'>{text}</Text>
         </Flex>
       </Flex>
     </Flex>
