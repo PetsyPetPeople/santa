@@ -3,7 +3,6 @@
 import { Icon, IconName } from '@/components';
 import { Flex, Typography } from 'antd';
 import clsx from 'clsx';
-import { isNull } from 'lodash';
 import { forwardRef, useImperativeHandle, useRef } from 'react';
 import { EventCardItemRef, EventItem } from '../types';
 
@@ -24,16 +23,21 @@ export const EventCardItem = forwardRef<EventCardItemRef, EventCardItemProps>(({
     currentRef: currentRef.current,
   }));
 
-  const classNameActive = (isBgColor = false) => {
-    return !isNull(item.count)
-      ? `${isBgColor ? 'bg-[#EE4D52]' : 'text-[#EE4D52]'}`
-      : `${isBgColor ? 'bg-[#9494A3]' : 'text-[#9494A3]'}`;
+  const classNameActive = () => {
+    switch (item.status) {
+      case 'hot':
+        return 'bg-[#F8595E]';
+      case 'cold':
+        return 'bg-[#56A9F5]';
+      default:
+        return 'bg-[#9494A3]';
+    }
   };
 
   return (
     <div className='flex-auto pb-5 pt-3'>
       <Flex vertical align='center' className='relative h-full'>
-        <span className={clsx('absolute top-[34px] z-10 h-[6px] w-[calc(100%-2px)]', classNameActive(true))} />
+        <span className={clsx('absolute top-[34px] z-10 h-[6px] w-[calc(100%-2px)]', classNameActive())} />
         <Icon name={item.id as IconName} size='lg' className='relative z-20' />
 
         <Flex
@@ -41,15 +45,15 @@ export const EventCardItem = forwardRef<EventCardItemRef, EventCardItemProps>(({
           ref={currentRef}
           vertical
           align='center'
-          className='popup w-[75px] flex-auto p-[20px_6px_16px_6px]'
+          className='popup mt-2 w-[66px] flex-auto px-[6px] py-[10px]'
         >
-          <Text className={clsx('mb-1 text-xl', classNameActive())}>{`$${item.value || '?'}`}</Text>
-          <Text className='mb-1 text-[#9494A3]'>{item.count ? `Touch ${item.count}` : '...'}</Text>
+          <Text className={clsx('mb-1 text-xl')}>{`$${item.value || '?'}`}</Text>
+          <Text className='text-[13px] text-[#9494A3]'>{item.count ? `Touch ${item.count}` : '...'}</Text>
 
           {!!item.count && (
             <div
               ref={buttonRef}
-              className='flex h-4 w-1/2 cursor-pointer items-end justify-center'
+              className='flex h-3 w-1/2 cursor-pointer items-end justify-center'
               onClick={() => onClick(index)}
             >
               <Icon name='arrow-down' width={12} height={8} />

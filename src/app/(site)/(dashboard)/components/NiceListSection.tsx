@@ -1,13 +1,24 @@
 'use client';
 
 import { Card, InfoVerticalCard } from '@/components';
+import { useMediaQuery } from '@/hooks';
 import { Flex } from 'antd';
 
 export function NiceListSection() {
+  const isDesktop = useMediaQuery(1024);
+
   return (
-    <Card className='mt-5' bodyStyle={{ padding: 60 }}>
-      <Flex justify='center' className='gap-8'>
+    <Card
+      hasBoxShadow={false}
+      className='mt-5 rounded-[20px]'
+      bodyStyle={{ borderRadius: 20, backgroundColor: '#EEEEF5', padding: isDesktop ? 60 : 24 }}
+    >
+      <Flex wrap='wrap' justify='center' className='gap-8'>
         <InfoVerticalCard
+          title='Nice List'
+          desc='Top Acquisition Performers'
+          iconName='checked'
+          iconBgColor='#FDDEDE'
           data={[
             { title: 'Facebook', content: 59 },
             { title: 'Google Ads', content: 70 },
@@ -16,11 +27,14 @@ export function NiceListSection() {
           ]}
         />
         <InfoVerticalCard
+          title='Naughty List'
+          desc='Worst Acquisition Performers'
+          iconName='close'
           data={[
-            { title: 'Facebook', content: 59 },
-            { title: 'Google Ads', content: 70 },
-            { title: 'Email', content: 90 },
-            { title: 'Canstar', content: 120 },
+            { title: 'Instagram', content: 59 },
+            { title: 'Tik Tok', content: 70 },
+            { title: 'LinkedIn', content: 90 },
+            { title: 'SMS', content: 120 },
           ]}
         />
       </Flex>

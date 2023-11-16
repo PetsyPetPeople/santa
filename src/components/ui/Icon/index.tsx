@@ -3,27 +3,48 @@ import React from 'react';
 
 export type IconName =
   | 'arrow-down'
-  | 'canstar'
   | 'checked'
-  | 'facebook'
+  | 'close'
+  | 'finder'
   | 'google'
   | 'hat'
+  | 'tiktok'
+  | 'facebook'
   | 'instagram'
+  | 'canstar'
+  | 'linked'
+  | 'credit-savvy'
+  | 'market'
+  | 'mozo'
+  | 'pet-insurance'
+  | 'pinterest'
+  | 'product-review'
+  | 'savvy'
+  | 'youtube'
+  | 'logo-tiktok'
+  | 'logo-facebook'
+  | 'logo-instagram'
+  | 'logo-canstar'
   | 'logo'
   | 'mail'
   | 'money'
   | 'mouse'
   | 'platform'
-  | 'tiktok'
+  | 'point'
+  | 'santa_1'
+  | 'santa_2'
+  | 'santa_3'
+  | 'santa_4'
   | 'lose'
   | 'unknown'
   | 'users'
+  | 'users-active'
   | 'user-active'
   | 'user-question'
   | 'win';
 
 interface IconProps {
-  name: IconName;
+  name: IconName | null;
   size?: 'sm' | 'md' | 'lg';
   width?: number;
   height?: number;
@@ -45,6 +66,7 @@ export const Icon: React.FC<IconProps> = ({ name, width, height, size = 'md', cl
     }
   }
 
+  if (!name) return null;
   return (
     <Image src={`/icons/${name}.svg`} alt={name} width={width} height={height} loading='lazy' className={className} />
   );

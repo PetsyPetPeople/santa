@@ -1,14 +1,36 @@
+/* stylelint-disable font-family-name-quotes */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 html,
 body {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  height: 100%;
+
   @apply !font-light;
+}
+
+body {
+  @apply bg-[#F6F6FB];
 }
 
 .button {
   filter: drop-shadow(0 3px 20px rgba(0, 0, 0, 7%));
+  background-color: #f6f6fb !important;
+  color: #353538 !important;
+  border-color: #e8e7f3 !important;
+  opacity: 1;
+
+  &:hover {
+    opacity: 0.75;
+  }
+
+  &.black {
+    background-color: black !important;
+    color: white !important;
+  }
 }
 
 .ant-pagination {
@@ -32,33 +54,33 @@ body {
 
 .popup {
   margin-top: 2px;
-  box-shadow: 0 3px 24px 0 #0000001a;
 
-  @apply relative rounded-xl bg-white;
+  @apply relative rounded-xl bg-[#F6F6FB];
 
   &::before,
   &::after {
     content: '';
     width: 0;
     height: 0;
-    border-left: 16px solid transparent;
-    border-right: 16px solid transparent;
-    border-bottom: 16px solid #fff;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 12px solid #f6f6fb;
 
     @apply absolute left-1/2 top-[-12px] translate-x-[-50%];
   }
 
   &.active {
-    border: 1px solid #ee4d52;
+    background-color: #2d2d31;
+    color: white;
 
     &::before {
-      top: -14px;
-      border-bottom: 14px solid #ee4d52;
+      top: -12px;
+      border-bottom: 12px solid #2d2d31;
     }
 
     &::after {
       top: -13px;
-      border-bottom: 14px solid #fff;
+      border-bottom: 12px solid #2d2d31;
     }
   }
 }
@@ -81,7 +103,7 @@ body {
   fill: #fff;
   filter: drop-shadow(0 10px 60px rgba(199, 207, 218, 50%));
 
-  @apply w-[400px] rounded-[30px] bg-white px-[36px] py-[24px];
+  @apply w-full rounded-[30px] bg-white px-6 py-[24px] sm:w-[400px] sm:px-[36px];
 }
 
 .text {
@@ -89,11 +111,11 @@ body {
 }
 
 .custom-tooltip-chart {
-  @apply px-6 py-3 text-center;
+  @apply px-4 py-3 text-center;
 }
 
 .custom-tooltip-chart .value {
-  @apply text-[20px] text-[#F05858];
+  @apply text-[20px];
 }
 
 .custom-tooltip-chart .label {

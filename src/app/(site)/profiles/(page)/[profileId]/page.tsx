@@ -1,8 +1,9 @@
 'use client';
 
-import { Button, Card, InfoCard, Loading, ProfileCard } from '@/components';
-import { Col, Flex, Row } from 'antd';
+import { Card, Heading, InfoCard, Loading, ProfileCard } from '@/components';
+import { Col, Row } from 'antd';
 import dynamic from 'next/dynamic';
+import { useSearchParams } from 'next/navigation';
 import { Fragment, Suspense } from 'react';
 import { EventCard } from '../../components';
 
@@ -18,15 +19,12 @@ const PieChartCard = dynamic(() => import('../../components/PieChartCard').then(
 });
 
 export default function ProfilePage() {
+  const searchParams = useSearchParams();
+
+  const search = searchParams?.get('status');
   return (
     <Fragment>
-      <Flex align='center' justify='space-between'>
-        <ProfileCard />
-
-        <Button buttonType='button' href='/'>
-          User Journey
-        </Button>
-      </Flex>
+      <ProfileCard />
 
       <Suspense fallback={<Loading />}>
         <EventCard />
@@ -34,7 +32,9 @@ export default function ProfilePage() {
 
       <Row gutter={24}>
         <Col span={12}>
-          <Card bodyStyle={{ height: '100%', padding: 0 }} className='h-[250px]'>
+          <Card bodyStyle={{ borderRadius: 20, height: '100%', padding: 30 }} className='rounded-[20px]'>
+            <Heading text='Source Attribution' level={3} />
+
             <PieChartCard />
           </Card>
         </Col>

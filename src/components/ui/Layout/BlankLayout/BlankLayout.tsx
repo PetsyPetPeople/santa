@@ -5,7 +5,7 @@ import { Content } from 'antd/es/layout/layout';
 
 export function BlankLayout({ children }: { children: React.ReactNode }) {
   return (
-    <Layout className='bg-[#F9F9FC]'>
+    <Layout className='bg-transparent'>
       <Content>{children}</Content>
     </Layout>
   );

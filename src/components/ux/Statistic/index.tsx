@@ -1,58 +1,40 @@
 'use client';
 
-import { ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons';
-import { Avatar, Flex } from 'antd';
-import Text from 'antd/es/typography/Text';
-import Title from 'antd/es/typography/Title';
-import clsx from 'clsx';
-import { FC } from 'react';
+import { Card, Icon, StatisticCard } from '@/components';
+import { Col, Flex, Progress, Row, Typography } from 'antd';
 
-interface StatisticProps {
-  title: string;
-  value: number | string | React.ReactNode;
-  precision?: number;
-  prefix?: React.ReactNode;
-  suffix?: React.ReactNode;
-  text?: string;
-  icon?: React.ReactNode;
-}
+const { Text, Title } = Typography;
 
-export const Statistic: FC<StatisticProps> = ({ title, value, precision, prefix, suffix, text, icon }) => {
-  const renderPrefix = () => {
-    if (prefix) return prefix;
-    if (precision && precision >= 0) return <ArrowUpOutlined style={{ color: '#00AC4F' }} />;
-    if (precision) return <ArrowDownOutlined style={{ color: '#F05858' }} />;
-
-    return null;
-  };
-
+export const StatisticStatus = () => {
   return (
-    <Flex>
-      <Avatar
-        size={84}
-        icon={
-          (
-            <Flex component='span' align='center' justify='center' className='h-full w-full'>
-              {icon}
-            </Flex>
-          ) || ''
-        }
-        className='bg-[#F0585833]'
-      />
-      <Flex vertical className='ml-4'>
-        <Text className='mb-0 text-[#9494A3]'>{title}</Text>
-        <Title level={3} className='mb-2 mt-0 font-normal'>
-          {value}
-        </Title>
-        <Flex align='center' gap={3} className='text-xs'>
-          {renderPrefix()}
-          <Text className={clsx('text-xs', precision && precision >= 0 ? 'text-[#00AC4F]' : 'text-[#F05858]')}>
-            {precision}
-            {suffix}
-          </Text>
-          <Text className='text-xs text-[#292D32]'>{text}</Text>
-        </Flex>
-      </Flex>
-    </Flex>
+    <Row gutter={[30, 30]} className='mt-8'>
+      <Col xs={24} lg={12}>
+        <Card className='h-full px-8 py-2'>
+          <StatisticCard
+            value={
+              <Flex align='center'>
+                <Title level={2} className='mb-2 mt-0 font-normal'>
+                  55%
+                </Title>
+                <Text className='ml-4 text-base font-light text-[#9797AC]'>of leads are unknown</Text>
+              </Flex>
+            }
+            icon={<Icon name='santa_4' className='h-[84px] w-[84px]' />}
+            desc={<Progress showInfo={false} percent={50} size={['100%', 12]} strokeColor='#EE4D52' />}
+          />
+        </Card>
+      </Col>
+      <Col xs={24} lg={12}>
+        <Card className='px-8 py-1'>
+          <Flex vertical align='center'>
+            <Icon name='point' className='h-[26px] w-[88px]' />
+            <Title level={2} className='mb-0 mr-1 mt-1 font-normal'>
+              10
+            </Title>
+            <Text className='text-base font-light text-[#9797AC]'>Average Lead Journey Touchpoints</Text>
+          </Flex>
+        </Card>
+      </Col>
+    </Row>
   );
 };

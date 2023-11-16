@@ -1,23 +1,37 @@
 'use client';
 
 import { Icon } from '@/components';
-import { Button, Flex, Layout, Menu, MenuProps } from 'antd';
+import { EllipsisOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons';
+import { Avatar, Dropdown, Flex, Layout, Menu, MenuProps } from 'antd';
 import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useSelectedLayoutSegment } from 'next/navigation';
 
-const items: MenuProps['items'] = [
+const MAIN_MENU: MenuProps['items'] = [
+  {
+    label: <Link href='/'>Dashboard</Link>,
+    key: 'dashboard',
+  },
   {
     label: <Link href='/source-map'>Source Map</Link>,
     key: 'source-map',
   },
   {
-    label: <Link href='/'>Master Dashboard</Link>,
-    key: 'dashboard',
-  },
-  {
     label: <Link href='/profiles'>Profile List</Link>,
     key: 'profiles',
+  },
+];
+
+const items: MenuProps['items'] = [
+  {
+    label: <Link href='/account'>Account</Link>,
+    icon: <UserOutlined />,
+    key: 'account',
+  },
+  {
+    label: <a onClick={() => signOut()}>Logout</a>,
+    icon: <LogoutOutlined />,
+    key: 'logout',
   },
 ];
 
@@ -27,19 +41,34 @@ export function Header() {
   const activeMenu = !activeSegment || activeSegment === '(dashboard)' ? 'dashboard' : activeSegment || '';
 
   return (
-    <Layout.Header className='sticky top-0 z-50 flex w-full items-center justify-between border-b'>
-      <Link href='/'>
+    <Layout.Header className='sticky top-0 z-50 flex w-full items-center border-b px-6 lg:px-[80px]'>
+      <Link href='/' className='w-[140px] shrink-0' passHref>
         <Icon name='logo' width={140} height={42} />
       </Link>
 
       {session.status === 'authenticated' && (
-        <Flex align='center' justify='end' className='flex-1'>
-          <Menu mode='horizontal' items={items} selectedKeys={[activeMenu]} className='mr-8 flex flex-1 justify-end' />
-          <Button onClick={() => signOut()} className='px-10'>
-            Log out
-          </Button>
+        <Flex align='center' justify='end' className='flex-auto'>
+          <Menu
+            mode='horizontal'
+            overflowedIndicator={<EllipsisOutlined />}
+            items={MAIN_MENU}
+            selectedKeys={[activeMenu]}
+            className='flex w-full justify-end'
+          />
         </Flex>
       )}
+
+      <Dropdown
+        menu={{ items }}
+        trigger={['click']}
+        placement='bottomRight'
+        overlayClassName='w-[140px]'
+        className='ml-auto'
+      >
+        <a onClick={(e) => e.preventDefault()}>
+          <Avatar icon={<UserOutlined />} />
+        </a>
+      </Dropdown>
     </Layout.Header>
   );
 }

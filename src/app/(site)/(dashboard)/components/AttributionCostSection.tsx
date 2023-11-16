@@ -2,6 +2,7 @@
 
 import { BAR_CHART_MOCK_DATA } from '@/__mock';
 import { Card, Heading, Loading } from '@/components';
+import { EChartColor } from '@/constants';
 import { Col, Row } from 'antd';
 import dynamic from 'next/dynamic';
 import { Fragment } from 'react';
@@ -14,21 +15,33 @@ const BarChartCard = dynamic(() => import('@/components/ux/BarChartCard').then((
 export function AttributionCostSection() {
   return (
     <Fragment>
-      <Heading text='Attribution Cost' />
+      <Heading text='Attribution Cost' rootClassName='mb-7 mt-[60px]' />
       <Row gutter={24}>
-        <Col span={8}>
-          <Card bodyStyle={{ height: 400 }}>
-            <BarChartCard data={BAR_CHART_MOCK_DATA} />
+        <Col xs={24} lg={8} className='mb-6 lg:mb-0'>
+          <Card bodyStyle={{ height: 420 }}>
+            <BarChartCard
+              heading='Cold Lead'
+              subHeading='Total Average Cost:'
+              price={110}
+              color={EChartColor.BLUE}
+              data={BAR_CHART_MOCK_DATA}
+            />
           </Card>
         </Col>
-        <Col span={8}>
-          <Card bodyStyle={{ height: 400 }}>
-            <BarChartCard data={BAR_CHART_MOCK_DATA} />
+        <Col xs={24} lg={8} className='mb-6 lg:mb-0'>
+          <Card bodyStyle={{ height: 420 }}>
+            <BarChartCard heading='Hot Lead' subHeading='Total Average Cost:' price={150} data={BAR_CHART_MOCK_DATA} />
           </Card>
         </Col>
-        <Col span={8}>
-          <Card bodyStyle={{ height: 400 }}>
-            <BarChartCard data={BAR_CHART_MOCK_DATA} />
+        <Col xs={24} lg={8}>
+          <Card bodyStyle={{ height: 420 }}>
+            <BarChartCard
+              heading='Acquisition'
+              subHeading='Total Average Cost:'
+              price={300}
+              color={EChartColor.BLACK}
+              data={BAR_CHART_MOCK_DATA}
+            />
           </Card>
         </Col>
       </Row>

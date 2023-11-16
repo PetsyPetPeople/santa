@@ -11,10 +11,10 @@ interface HeadingProps extends TitleProps {
   text: string | React.ReactNode;
 }
 
-export function Heading({ text, className, rootClassName, ...props }: HeadingProps) {
+export function Heading({ level = 2, text, className, rootClassName, ...props }: HeadingProps) {
   return (
-    <Flex vertical className={clsx('mb-7 mt-[60px]', rootClassName)}>
-      <Title level={2} className={clsx('mb-0', className)} {...props}>
+    <Flex vertical className={rootClassName}>
+      <Title level={level} className={clsx('mb-0', className)} {...props}>
         {text}
       </Title>
       <Divider className='mb-0 mt-3 bg-[#D9D9D9]' />

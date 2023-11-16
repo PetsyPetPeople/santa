@@ -1,7 +1,6 @@
 'use client';
 import { Divider, Flex, Typography } from 'antd';
 import clsx from 'clsx';
-import Image from 'next/image';
 import { Ref, forwardRef } from 'react';
 
 const { Text } = Typography;
@@ -20,34 +19,34 @@ export const EventPopup = forwardRef(({ className, position }: EventPopupProps, 
       ref={ref}
       vertical
       align='center'
-      className={clsx('popup active absolute z-30 w-[168px] p-[24px]', className)}
+      className={clsx('popup active absolute z-30 p-4', className)}
       style={{
         top: position.top,
         left: position.left,
       }}
     >
-      <Text className='mb-1 text-[20px] text-[#F05858]'>$1.000.000</Text>
-      <Text className='mb-2 text-[#9494A3]'>Touch 1</Text>
-      <Image src='/icons/arrow-down.svg' alt='event' width={9} height={6} />
+      <Text className='mb-1 text-[20px] text-[#ffffff]'>$1.000.000</Text>
+      <Text className='text-[#9494A3]'>Touch 1</Text>
+      <Divider className='my-3 border-[#ffffff]' />
 
       <Flex vertical>
-        <Text className='text-[14px]'>Source:</Text>
-        <Text className='text-[14px] text-[#9494A3]'>Facebook Ads</Text>
-        <Text className='text-[14px] text-[#9494A3]'>Campaign 1</Text>
+        <Text className='text-[14px] text-[#9797AC]'>Source:</Text>
+        <Text className='text-[14px] text-[#ffffff]'>Facebook Ads</Text>
+        <Text className='text-[14px] text-[#ffffff]'>Campaign 1</Text>
 
-        <Divider className='my-2 border-[#9494A3]' />
-        <Text className='text-[14px]'>Time Decay:</Text>
-        <Text className='text-[14px] text-[#9494A3]'>10 days</Text>
+        <Divider className='my-2 border-[#9797AC]' />
+        <Text className='text-[14px] text-[#9797AC]'>Time Decay:</Text>
+        <Text className='text-[14px] text-[#ffffff]'>10 days</Text>
 
-        <Divider className='my-2 border-[#9494A3]' />
-        <Text className='text-[14px]'>Events:</Text>
-        <Text className='text-[14px] text-[#9494A3]'>Site visit: 10 sec</Text>
-        <Text className='text-[14px] text-[#9494A3]'>Scroll Depth: 30%</Text>
-        <Text className='text-[14px] text-[#9494A3]'>Page Views: 1</Text>
+        <Divider className='my-2 border-[#9797AC]' />
+        <Text className='text-[14px] text-[#9797AC]'>Events:</Text>
+        <Text className='text-[14px] text-[#ffffff]'>Site visit: 10 sec</Text>
+        <Text className='text-[14px] text-[#ffffff]'>Scroll Depth: 30%</Text>
+        <Text className='text-[14px] text-[#ffffff]'>Page Views: 1</Text>
 
-        <Divider className='my-2 border-[#9494A3]' />
-        <Text className='text-[14px]'>Journey Status:</Text>
-        <Text className='text-[14px] text-[#9494A3]'>Soft Leads</Text>
+        <Divider className='my-2 border-[#9797AC]' />
+        <Text className='text-[14px] text-[#9797AC]'>Journey Status:</Text>
+        <Text className='text-[14px] text-[#ffffff]'>Soft Leads</Text>
       </Flex>
     </Flex>
   );

@@ -1,6 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { EChartColor } from '@/constants';
+import { dollarUS } from '@/helpers';
 import { Flex, Typography } from 'antd';
-import { Fragment } from 'react';
+import { isString } from 'lodash';
+import React, { Fragment } from 'react';
 import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
 const { Title, Text } = Typography;
@@ -8,7 +11,7 @@ const { Title, Text } = Typography;
 const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
     return (
-      <div className='custom-tooltip-chart popup active'>
+      <div className='custom-tooltip-chart popup'>
         <p className='value'>${payload[0].value}</p>
         <p className='label'>{label}</p>
       </div>
@@ -19,24 +22,34 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 };
 
 interface BarChartCardProps {
+  color?: EChartColor;
+  heading: string | React.ReactNode;
+  subHeading: string | React.ReactNode;
+  price: number;
   data: {
     label: string;
     value: number;
   }[];
 }
 
-export function BarChartCard({ data }: BarChartCardProps) {
+export function BarChartCard({ data, color = EChartColor.RED, heading, subHeading, price }: BarChartCardProps) {
   return (
     <Fragment>
       <Flex align='center' justify='space-between' className='mb-4 px-2'>
-        <Title level={3} className='mb-0'>
-          Cold Lead
-        </Title>
-        <Flex align='end' className='ml-2'>
-          <Text className='mb-[3px] mr-1 text-xs'>Total Average Cost</Text>
-          <Title level={3} className='m-0'>
-            $110
+        {isString(heading) ? (
+          <Title level={3} className='mb-0'>
+            {heading}
           </Title>
+        ) : (
+          heading
+        )}
+        <Flex align='end' className='ml-2'>
+          {isString(subHeading) ? <Text className='mb-[3px] mr-1 text-xs'>{subHeading}</Text> : subHeading}
+          {price ? (
+            <Title level={3} className='m-0'>
+              {dollarUS.format(price)}
+            </Title>
+          ) : null}
         </Flex>
       </Flex>
       <ResponsiveContainer width='100%' height='100%'>
@@ -47,7 +60,7 @@ export function BarChartCard({ data }: BarChartCardProps) {
             top: 5,
             right: 10,
             left: -10,
-            bottom: 15,
+            bottom: 50,
           }}
         >
           <XAxis
@@ -77,7 +90,7 @@ export function BarChartCard({ data }: BarChartCardProps) {
             tickLine={false}
           />
           <Tooltip content={CustomTooltip} />
-          <Bar dataKey='value' fill='#F05858' barSize={18} background isAnimationActive={false} />
+          <Bar dataKey='value' fill={color} barSize={18} background isAnimationActive={false} />
         </BarChart>
       </ResponsiveContainer>
     </Fragment>

@@ -15,7 +15,7 @@ export const Button: FC<ButtonProps> = ({ children, href, buttonType = 'link', c
   return buttonType === 'link' && href ? (
     <Link href={href} passHref legacyBehavior>
       <AntButton
-        className={clsx('text-md cursor-pointer border-0 pt-[4px] text-[#2D2D31] hover:shadow-md', className)}
+        className={clsx('text-md cursor-pointer border-0 pt-[4px] text-[#353538] hover:shadow-md', className)}
         {...props}
       >
         View Attribution

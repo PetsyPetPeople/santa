@@ -4,12 +4,13 @@ const theme: ThemeConfig = {
   token: {
     colorPrimary: '#EE4D52',
     borderRadius: 10,
-    colorText: '#2D2D31',
-    colorTextHeading: '#2D2D31',
-    fontWeightStrong: 400,
+    colorText: '#353538',
+    colorTextHeading: '#353538',
+    fontWeightStrong: 300,
     fontSizeLG: 16,
     fontSizeHeading2: 32,
     fontSizeHeading3: 22,
+    fontFamily: `'Inter' sans-serif`,
   },
   components: {
     Layout: {
@@ -26,15 +27,16 @@ const theme: ThemeConfig = {
       textFontSize: 14,
     },
     Menu: {
-      itemPaddingInline: 30,
+      itemPaddingInline: 22,
+      horizontalItemSelectedColor: '#353538',
     },
     Table: {
-      headerBg: '#f9f9fc',
-      headerColor: '#9494A3',
-      footerBg: '#F9F9FC',
+      headerBg: '#ffffff',
+      headerColor: '#9797AC',
+      footerBg: '#ffffff',
       cellFontSize: 14,
-      borderColor: '#E8E7F3',
-      footerColor: '#9494A3',
+      borderColor: '#F6F6FB',
+      footerColor: '#9797AC',
     },
     Pagination: {
       itemActiveBg: 'black',

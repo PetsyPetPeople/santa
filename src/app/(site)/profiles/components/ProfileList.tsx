@@ -2,8 +2,9 @@
 
 import { Button, Card, Table } from '@/components';
 import { SearchOutlined } from '@ant-design/icons';
-import { Flex, Input, Select, Space, Tag, Typography } from 'antd';
+import { Divider, Flex, Input, Select, Space, Typography } from 'antd';
 import { ColumnsType } from 'antd/es/table';
+import clsx from 'clsx';
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -20,11 +21,11 @@ interface DataType {
 const items = [
   {
     label: 'Newest',
-    key: 'newest',
+    value: 'newest',
   },
   {
     label: 'Oldest',
-    key: 'oldest',
+    value: 'oldest',
   },
 ];
 
@@ -59,9 +60,7 @@ const columns: ColumnsType<DataType> = [
     key: 'status',
     className: 'font-light',
     render: (_, record) => (
-      <Tag className='text-sm' color={record.status === 'Hot' ? '#F05858' : undefined}>
-        {record.status}
-      </Tag>
+      <span className={clsx(record.status === 'Hot' ? 'text-[#F05858]' : 'text-[#56A9F5]')}>{record.status}</span>
     ),
   },
 
@@ -72,7 +71,7 @@ const columns: ColumnsType<DataType> = [
     width: 150,
     render: (_, record) => (
       <Space size='middle'>
-        <Button buttonType='link' href={`/profiles/${record.key}`} className='button pt-[5px]'>
+        <Button buttonType='link' href={`/profiles/${record.key}?status=${record.status}`} className='button pt-[5px]'>
           View Attribution
         </Button>
       </Space>
@@ -181,28 +180,37 @@ const data: DataType[] = [
 
 export const ProfileList = () => {
   return (
-    <Card bodyStyle={{ padding: 48, paddingBottom: 24 }}>
-      <Flex align='center' justify='space-between' className='mb-8 w-full px-4'>
-        <Title level={2} className='mb-0'>
+    <Card className='p-6 lg:px-[90px] lg:py-[54px]'>
+      <Flex align='center' justify='space-between' className='w-full'>
+        <Title level={3} className='mb-0'>
           All Leads
         </Title>
         <Space>
           <Input
-            className='w-[215px] rounded-[10px] bg-white'
+            className='w-[200px] rounded-[10px] bg-white'
             placeholder='Search'
             prefix={<SearchOutlined style={{ fontSize: 20, color: '#7E7E7E' }} />}
           />
 
-          <Select placeholder='Short by' className='w-[170px]'>
-            {items.map((item) => (
-              <Option key={item?.key} value={item.key} className='rounded-[10px] bg-white'>
-                {item.label}
-              </Option>
-            ))}
-          </Select>
+          <Flex align='center' className='rounded-[10px] border pl-3'>
+            <span>Short by:</span>
+            <Select
+              defaultValue='newest'
+              bordered={false}
+              popupMatchSelectWidth={120}
+              placement='bottomRight'
+              className='w-[90px]'
+            >
+              {items.map((item) => (
+                <Option key={item?.value} value={item.value} className='rounded-[10px] bg-white'>
+                  {item.label}
+                </Option>
+              ))}
+            </Select>
+          </Flex>
         </Space>
       </Flex>
-
+      <Divider className='mt-4' />
       <Table columns={columns} data={data} />
     </Card>
   );

@@ -25,14 +25,13 @@ export const Table = ({ columns, data, isScroll = false }: TableProps) => {
 
   return (
     <AntTable
-      rowClassName='bg-[#f9f9fc]'
       columns={columns}
       dataSource={getData(current, PAGE_SIZE)}
       footer={() => (
         <Row align='middle' justify='space-between' className='mt-4'>
-          <Row>{`Showing data ${(current - 1) * PAGE_SIZE + 1} to ${current * PAGE_SIZE} of ${
+          <span className='font-medium'>{`Showing data ${(current - 1) * PAGE_SIZE + 1} to ${current * PAGE_SIZE} of ${
             data.length
-          } entries`}</Row>
+          } entries`}</span>
           <Pagination current={current} total={data.length} pageSize={PAGE_SIZE} onChange={onChange} />
         </Row>
       )}

@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, Icon } from '@/components';
+import { Card, Heading, Icon } from '@/components';
 import { useClickAway, useDebounceEffect } from 'ahooks';
 import { Flex } from 'antd';
 import { isNull } from 'lodash';
@@ -10,34 +10,22 @@ import { EventCardItem } from './EventCardItem';
 import { EventPopup } from './EventPopup';
 
 const data: EventItem[] = [
-  { id: 'instagram', count: 1, value: 100 },
-  { id: 'google', count: 2, value: 200 },
-  { id: 'tiktok', count: 2, value: 200 },
-  { id: 'facebook', count: 2, value: 200 },
-  { id: 'canstar', count: 2, value: 200 },
-  { id: 'mail', count: 2, value: 200 },
+  { id: 'instagram', count: 1, value: 100, status: 'hot' },
+  { id: 'google', count: 2, value: 200, status: 'hot' },
+  { id: 'tiktok', count: 2, value: 200, status: 'hot' },
+  { id: 'facebook', count: 2, value: 200, status: 'hot' },
+  { id: 'canstar', count: 2, value: 200, status: 'hot' },
+  { id: 'youtube', count: 2, value: 200, status: 'hot' },
+  { id: 'credit-savvy', count: 2, value: 200, status: 'hot' },
+  { id: 'linked', count: 2, value: 200, status: 'cold' },
+  { id: 'market', count: 2, value: 200, status: 'cold' },
+  { id: 'mozo', count: 2, value: 200, status: 'cold' },
+  { id: 'pet-insurance', count: 2, value: 200, status: 'cold' },
+  { id: 'pinterest', count: 2, value: 200, status: 'cold' },
+  { id: 'product-review', count: 2, value: 200, status: 'cold' },
+  { id: 'savvy', count: 2, value: 200, status: 'cold' },
 
-  { id: 'instagram', count: 1, value: 100 },
-  { id: 'google', count: 2, value: 200 },
-  { id: 'tiktok', count: 2, value: 200 },
-  { id: 'facebook', count: 2, value: 200 },
-  { id: 'canstar', count: 2, value: 200 },
-  { id: 'mail', count: 2, value: 200 },
-  { id: 'instagram', count: 1, value: 100 },
-  { id: 'google', count: 2, value: 200 },
-  { id: 'tiktok', count: 2, value: 200 },
-  { id: 'facebook', count: 2, value: 200 },
-  { id: 'canstar', count: 2, value: 200 },
-  { id: 'mail', count: 2, value: 200 },
-
-  { id: 'instagram', count: 1, value: 100 },
-  { id: 'google', count: 2, value: 200 },
-  { id: 'tiktok', count: 2, value: 200 },
-  { id: 'facebook', count: 2, value: 200 },
-  { id: 'canstar', count: 2, value: 200 },
-  { id: 'mail', count: 2, value: 200 },
-
-  { id: 'unknown', count: null, value: null },
+  { id: 'unknown', count: null, value: null, status: null },
 ];
 
 export const EventCard = () => {
@@ -60,8 +48,8 @@ export const EventCard = () => {
     const position = eventItemRef.current[id]!.currentRef?.getBoundingClientRect();
 
     if (position) {
-      const top = Math.ceil(position?.top) - 237 + window.scrollY;
-      const left = Math.ceil(position?.left) - 128;
+      const top = Math.ceil(position?.top) - 238 + window.scrollY;
+      const left = Math.ceil(position?.left) - 120;
 
       setPosition({ top, left });
     }
@@ -81,7 +69,8 @@ export const EventCard = () => {
   };
 
   return (
-    <Card className='relative mb-5 mt-10' bodyStyle={{ padding: '50px 30px' }}>
+    <Card className='relative mb-5 mt-10' bodyStyle={{ padding: '30px 30px 50px' }}>
+      <Heading text='Lead Journey' level={3} rootClassName='mb-[60px]' />
       <Flex
         className='scrollbar-hide relative overflow-y-auto'
         align='flex-start'

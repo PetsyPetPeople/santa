@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
-import { Card } from '@/components';
+import { Card, Icon, IconName } from '@/components';
 import { PAGE_CURRENT, PAGE_SIZE } from '@/constants';
 import { useApp } from '@/hooks';
 import {
   Button,
+  Divider,
   Flex,
   Form,
   Input,
@@ -26,6 +27,7 @@ const { Title } = Typography;
 
 interface DataType {
   key: string;
+  icon: IconName | null;
   platform: string;
   campaignObjective: string;
   funnelTarget: string;
@@ -43,6 +45,7 @@ interface DataType {
 const data: DataType[] = [
   {
     key: '1',
+    icon: 'canstar',
     platform: 'Canstar',
     campaignObjective: 'Lead',
     funnelTarget: 'TOF',
@@ -58,6 +61,7 @@ const data: DataType[] = [
   },
   {
     key: '2',
+    icon: 'facebook',
     platform: 'Facebook',
     campaignObjective: 'Nurture',
     funnelTarget: 'BOF',
@@ -73,6 +77,7 @@ const data: DataType[] = [
   },
   {
     key: '3',
+    icon: 'instagram',
     platform: 'Instagram',
     campaignObjective: 'Nurture',
     funnelTarget: 'BOF',
@@ -88,6 +93,7 @@ const data: DataType[] = [
   },
   {
     key: '4',
+    icon: 'finder',
     platform: 'Finder',
     campaignObjective: 'Lead',
     funnelTarget: 'BOF',
@@ -169,6 +175,7 @@ export const SourceList = () => {
   const handleAdd = () => {
     const newData: DataType = {
       key: '',
+      icon: null,
       platform: '',
       campaignObjective: '',
       funnelTarget: '',
@@ -232,17 +239,22 @@ export const SourceList = () => {
       title: 'Platform',
       dataIndex: 'platform',
       key: 'platform',
-      width: 120,
-      className: 'font-light',
+      width: 160,
       ellipsis: true,
       editable: true,
+      render: (i: any, record: DataType) => (
+        <Flex align='center'>
+          <Icon name={record.icon} className='mr-3 h-[28px] w-[28px]' />
+          <span>{record.platform || ''}</span>
+        </Flex>
+      ),
     },
+
     {
       title: 'Campaign Objective',
       dataIndex: 'campaignObjective',
       key: 'campaignObjective',
       width: 170,
-      className: 'font-light',
       ellipsis: true,
       editable: true,
     },
@@ -251,7 +263,6 @@ export const SourceList = () => {
       dataIndex: 'funnelTarget',
       key: 'funnelTarget',
       width: 140,
-      className: 'font-light',
       ellipsis: true,
       editable: true,
     },
@@ -260,7 +271,6 @@ export const SourceList = () => {
       dataIndex: 'source',
       key: 'source',
       width: 140,
-      className: 'font-light',
       ellipsis: true,
       editable: true,
       render: (i: any, record: DataType) => <span>{record.source || '-'}</span>,
@@ -270,7 +280,6 @@ export const SourceList = () => {
       dataIndex: 'medium',
       key: 'medium',
       width: 140,
-      className: 'font-light',
       ellipsis: true,
       editable: true,
       render: (i: any, record: DataType) => <span>{record.medium || '-'}</span>,
@@ -280,7 +289,6 @@ export const SourceList = () => {
       dataIndex: 'campaignName',
       key: 'campaignName',
       width: 160,
-      className: 'font-light',
       ellipsis: true,
       editable: true,
       render: (i: any, record: DataType) => <span>{record.campaignName || '-'}</span>,
@@ -290,7 +298,6 @@ export const SourceList = () => {
       dataIndex: 'campaignTerm',
       key: 'campaignTerm',
       width: 140,
-      className: 'font-light',
       ellipsis: true,
       editable: true,
       render: (i: any, record: DataType) => <span>{record.campaignTerm || '-'}</span>,
@@ -300,7 +307,6 @@ export const SourceList = () => {
       dataIndex: 'campaignContent',
       key: 'campaignContent',
       width: 160,
-      className: 'font-light',
       ellipsis: true,
       editable: true,
       render: (i: any, record: DataType) => <span>{record.campaignContent || '-'}</span>,
@@ -319,7 +325,7 @@ export const SourceList = () => {
             placement='topLeft'
             title={record.utm}
             color='white'
-            overlayInnerStyle={{ color: '#2D2D31', fontSize: 14 }}
+            overlayInnerStyle={{ color: '#353538', fontSize: 14 }}
           >
             {record.utm}
           </Tooltip>
@@ -331,7 +337,6 @@ export const SourceList = () => {
       dataIndex: 'heading',
       key: 'heading',
       width: 180,
-      className: 'font-light',
       ellipsis: true,
       editable: true,
       render: (i: any, record: DataType) => <span>{record.heading || '-'}</span>,
@@ -341,7 +346,6 @@ export const SourceList = () => {
       dataIndex: 'creative',
       key: 'creative',
       width: 140,
-      className: 'font-light',
       ellipsis: true,
       editable: true,
       render: (i: any, record: DataType) => <span>{record.creative || '-'}</span>,
@@ -351,7 +355,6 @@ export const SourceList = () => {
       dataIndex: 'costPerClick',
       key: 'costPerClick',
       width: 180,
-      className: 'font-light',
       inputType: 'number',
       ellipsis: true,
       editable: true,
@@ -359,27 +362,27 @@ export const SourceList = () => {
     {
       title: '',
       key: 'action',
-      className: 'text-center bg-[#f9f9fc]',
-      width: 130,
+      className: 'text-center',
+      width: 170,
       fixed: 'right',
       render: (i: any, record: DataType) => {
         const editable = isEditing(record);
 
         return editable && !isAdding ? (
           <Space>
-            <Button size='small' className='button' onClick={() => handleSave(record.key)}>
+            <Button type='link' className='button' onClick={() => handleSave(record.key)}>
               Save
             </Button>
-            <Button size='small' className='button' onClick={handleCancel}>
+            <Button type='link' className='button' onClick={handleCancel}>
               Cancel
             </Button>
           </Space>
         ) : (
           <Space>
             <Button
-              size='small'
-              disabled={isAdding || editingKey !== ''}
+              type='link'
               className='button'
+              disabled={isAdding || editingKey !== ''}
               onClick={() => handleEdit(record)}
             >
               Edit
@@ -394,7 +397,7 @@ export const SourceList = () => {
               cancelButtonProps={{ className: 'text-xs mt-2 w-[60px]' }}
               okButtonProps={{ className: 'text-xs mt-2 w-[60px]' }}
             >
-              <Button size='small' disabled={isAdding || editingKey !== ''} className='button'>
+              <Button type='link' className='button' disabled={isAdding || editingKey !== ''}>
                 Delete
               </Button>
             </Popconfirm>
@@ -422,12 +425,13 @@ export const SourceList = () => {
   });
 
   return (
-    <Card bodyStyle={{ padding: 48, paddingBottom: 24 }}>
-      <Flex align='center' justify='space-between' className='mb-8 w-full px-4'>
-        <Title level={2} className='mb-0'>
-          Source / Landing Map
+    <Card bodyStyle={{ borderRadius: 20 }} className='rounded-[20px] p-6 lg:px-[60px] lg:py-4'>
+      <Flex align='center' justify='space-between' className='w-full'>
+        <Title level={3} className='mb-0'>
+          Source Map
         </Title>
       </Flex>
+      <Divider className='mt-4' />
       <Form form={form} component={false}>
         <Table
           components={{
@@ -435,19 +439,26 @@ export const SourceList = () => {
               cell: EditableCell,
             },
           }}
-          rowClassName={() => 'editable-row bg-[#f9f9fc]'}
+          rowClassName={() => 'editable-row'}
           columns={mergedColumns as ColumnsType<DataType>}
           dataSource={getData(current, PAGE_SIZE)}
           footer={() => (
             <Row align='middle' justify='space-between' className='mt-4'>
               {!isAdding ? (
-                <Button disabled={editingKey !== ''} onClick={handleAdd}>
+                <Button type='link' className='button' disabled={editingKey !== ''} onClick={handleAdd}>
                   + Add another source
                 </Button>
               ) : (
                 <Flex gap={8}>
-                  <Button className='w-[140px] border-none bg-black text-white'>Save</Button>
-                  <Button disabled={editingKey !== ''} onClick={handleCancelAdd} className='w-[140px]'>
+                  <Button type='link' className='button black w-[140px]'>
+                    Save
+                  </Button>
+                  <Button
+                    type='link'
+                    disabled={editingKey !== ''}
+                    onClick={handleCancelAdd}
+                    className='button w-[140px]'
+                  >
                     Cancel
                   </Button>
                 </Flex>

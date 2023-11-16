@@ -1,23 +1,31 @@
 'use client';
 
-import { DateRange, Icon, InfoCard, Statistic } from '@/components';
+import { DateRange, Icon, Statistic, StatisticCard, StatisticStatus } from '@/components';
 import { Flex, Typography } from 'antd';
+import dynamic from 'next/dynamic';
 import { Fragment } from 'react';
-import { AttributionCostSection, FirstClickSourceSection, LastClickSourceSection, NiceListSection } from './components';
+import { AttributionCostSection, FirstClickSourceSection, LastClickSourceSection } from './components';
 
 const { Text } = Typography;
+
+const NiceListSectionDynamic = dynamic(
+  async () => import('./components/NiceListSection').then((res) => res.NiceListSection),
+  { ssr: false },
+);
 
 export default function HomePage() {
   return (
     <Fragment>
-      <Flex align='center' justify='space-between'>
-        <Statistic
+      <Flex wrap='wrap' align='center' justify='space-between'>
+        <StatisticCard
+          hasBg
           title='Total Leads'
           value={100000}
           precision={16}
-          icon={<Icon name='user-question' className='h-[48px] w-[48px]' />}
+          icon={<Icon name='money' className='ml-1 h-[48px] w-[48px]' />}
           suffix='%'
           text='this month'
+          className='mb-6 w-full sm:mb-0 sm:w-auto'
         />
 
         <Flex vertical>
@@ -26,17 +34,11 @@ export default function HomePage() {
         </Flex>
       </Flex>
 
-      <InfoCard
-        data={[
-          { content: 'Total Cold Leads', title: '1000' },
-          { content: 'Total Hot Leads', title: '1000' },
-          { content: 'Acquisitions', title: '500' },
-          { content: 'Average Touch points', title: '10' },
-        ]}
-        className='mt-16'
-      />
+      <Statistic className='mb-8 mt-12' />
 
-      <NiceListSection />
+      <NiceListSectionDynamic />
+
+      <StatisticStatus />
 
       <AttributionCostSection />
 

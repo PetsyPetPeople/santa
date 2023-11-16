@@ -3,7 +3,7 @@
 import { Badge, Flex, Typography } from 'antd';
 import { Cell, Pie, PieChart } from 'recharts';
 
-const { Title } = Typography;
+const { Title, Text } = Typography;
 
 interface PieChartVerticalItem {
   title: string;
@@ -15,12 +15,9 @@ interface PieChartVerticalCardProps {
   id: string;
   title?: string;
   data: PieChartVerticalItem[];
-  dataColors: {
-    [key: string]: PieChartVerticalItem[];
-  };
 }
 
-export function PieChartVerticalCard({ id, title, data, dataColors }: PieChartVerticalCardProps) {
+export function PieChartVerticalCard({ id, title, data }: PieChartVerticalCardProps) {
   return (
     <Flex vertical align='center' className='h-full w-full'>
       <PieChart id={`pie-${id}`} width={250} height={250}>
@@ -34,17 +31,11 @@ export function PieChartVerticalCard({ id, title, data, dataColors }: PieChartVe
       <Title level={3} className='mb-6 text-[22px]'>
         {title}
       </Title>
-      <Flex wrap='wrap' className='w-full'>
-        {Object.values(dataColors)?.map((item, index) => (
-          <Flex key={index} vertical wrap='wrap' className='w-1/3'>
-            {item.map((e, i) => (
-              <Badge
-                key={i}
-                color={e.color}
-                className='my-1'
-                text={<span className='ml-1 text-[#9494A3]'>{e.title}</span>}
-              />
-            ))}
+      <Flex vertical className='w-full px-6'>
+        {data?.map((item, index) => (
+          <Flex key={index} align='center' justify='space-between' className='my-1'>
+            <Badge key={index} color={item.color} text={<span className='ml-2'>{item.title}</span>} />
+            <Text className='ml-2'>{item.value}%</Text>
           </Flex>
         ))}
       </Flex>
