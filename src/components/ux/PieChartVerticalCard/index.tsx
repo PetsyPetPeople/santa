@@ -34,8 +34,16 @@ export function PieChartVerticalCard({ id, title, data }: PieChartVerticalCardPr
       <Flex vertical className='w-full px-6'>
         {data?.map((item, index) => (
           <Flex key={index} align='center' justify='space-between' className='my-1'>
-            <Badge key={index} color={item.color} text={<span className='ml-2'>{item.title}</span>} />
-            <Text className='ml-2'>{item.value}%</Text>
+            <Badge
+              key={index}
+              color={item.color}
+              text={<span title={item.title}>{item.title}</span>}
+              classNames={{
+                root: 'flex flex-auto items-center pr-2',
+                indicator: 'shrink-0 mr-2',
+              }}
+            />
+            <Text>{item.value}%</Text>
           </Flex>
         ))}
       </Flex>

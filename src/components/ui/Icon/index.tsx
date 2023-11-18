@@ -25,6 +25,7 @@ export type IconName =
   | 'logo-facebook'
   | 'logo-instagram'
   | 'logo-canstar'
+  | 'logo-finder'
   | 'logo'
   | 'mail'
   | 'money'
@@ -67,6 +68,7 @@ export const Icon: React.FC<IconProps> = ({ name, width, height, size = 'md', cl
   }
 
   if (!name) return null;
+
   return (
     <Image src={`/icons/${name}.svg`} alt={name} width={width} height={height} loading='lazy' className={className} />
   );

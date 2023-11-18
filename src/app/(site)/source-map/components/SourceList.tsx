@@ -45,7 +45,7 @@ interface DataType {
 const data: DataType[] = [
   {
     key: '1',
-    icon: 'canstar',
+    icon: 'logo-canstar',
     platform: 'Canstar',
     campaignObjective: 'Lead',
     funnelTarget: 'TOF',
@@ -61,7 +61,7 @@ const data: DataType[] = [
   },
   {
     key: '2',
-    icon: 'facebook',
+    icon: 'logo-facebook',
     platform: 'Facebook',
     campaignObjective: 'Nurture',
     funnelTarget: 'BOF',
@@ -77,7 +77,7 @@ const data: DataType[] = [
   },
   {
     key: '3',
-    icon: 'instagram',
+    icon: 'logo-instagram',
     platform: 'Instagram',
     campaignObjective: 'Nurture',
     funnelTarget: 'BOF',
@@ -93,7 +93,7 @@ const data: DataType[] = [
   },
   {
     key: '4',
-    icon: 'finder',
+    icon: 'logo-finder',
     platform: 'Finder',
     campaignObjective: 'Lead',
     funnelTarget: 'BOF',

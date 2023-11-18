@@ -45,7 +45,7 @@ export const EventCardItem = forwardRef<EventCardItemRef, EventCardItemProps>(({
           ref={currentRef}
           vertical
           align='center'
-          className='popup mt-2 w-[66px] flex-auto px-[6px] py-[10px]'
+          className='popup mt-2 w-[76px] flex-auto px-[6px] py-[10px]'
         >
           <Text className={clsx('mb-1 text-xl')}>{`$${item.value || '?'}`}</Text>
           <Text className='text-[13px] text-[#9494A3]'>{item.count ? `Touch ${item.count}` : '...'}</Text>

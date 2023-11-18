@@ -1,44 +1,63 @@
 'use client';
 
-import { Badge, Flex } from 'antd';
-import Text from 'antd/es/typography/Text';
+import { Badge, Col, Flex, Row } from 'antd';
+import { flatMap } from 'lodash';
 import { Cell, Pie, PieChart } from 'recharts';
 
-const data = [
-  { name: 'Email', value: 10 },
-  { name: 'Canstar', value: 20 },
-  { name: 'Facebook', value: 30 },
-  { name: 'Tik Tok', value: 15 },
-  { name: 'Ads', value: 50 },
-  { name: 'Google', value: 8 },
-  { name: 'Instagram', value: 8 },
-];
-const COLORS = ['#88889C', '#505053', '#FFDBDB', '#FFB4B4', '#FD8B8B', '#F05858'];
+const MOCK_DATA = {
+  COL1: [
+    { name: 'Savvy', value: 20, color: '#EE4D52' },
+    { name: 'CanCompare The Market', value: 15, color: '#F17175' },
+    { name: 'Credit Savvy', value: 10, color: '#F59497' },
+    { name: 'Tik Tok', value: 9, color: '#F8B8BA' },
+    { name: 'Google', value: 8, color: '#FCDBDC' },
+    { name: 'Mozo', value: 7, color: '#FDEDEE' },
+  ],
+  COL2: [
+    { name: 'Finder', value: 6, color: '#353538' },
+    { name: 'Product Review', value: 5, color: '#5D5D60' },
+    { name: 'Pinterest', value: 4, color: '#868688' },
+    { name: 'YouTube', value: 3, color: '#AEAEAF' },
+    { name: 'Top 10 Pet Insurance', value: 2, color: '#D7D7D7' },
+    { name: 'Other', value: 1, color: '#EBEBEB' },
+  ],
+};
 
 export const PieChartCard = () => {
-  return (
-    <Flex>
-      <PieChart id='source' width={250} height={250}>
-        <Pie data={data} stroke='none' innerRadius={50} fill='#8884d8' dataKey='value'>
-          {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-          ))}
-        </Pie>
-      </PieChart>
+  const data = flatMap(Object.values(MOCK_DATA));
 
-      <Flex vertical className='ml-8 mt-8 w-[270px]'>
-        <Text className='mb-6 text-[22px]'>Source Attribution</Text>
-        <Flex wrap='wrap'>
-          {data.map((item, index) => (
-            <Badge
-              key={index}
-              color={COLORS[index % COLORS.length]}
-              text={<span className='ml-1 text-[#9494A3]'>{item.name}</span>}
-              className='my-1 w-1/2'
-            />
+  return (
+    <Row>
+      <Col xs={24} xl={8} className='flex justify-center xl:block'>
+        <PieChart id='source' width={250} height={250}>
+          <Pie data={data} stroke='none' innerRadius={50} fill='#8884d8' dataKey='value'>
+            {data.map((item, index) => (
+              <Cell key={`cell-${index}`} fill={item.color} />
+            ))}
+          </Pie>
+        </PieChart>
+      </Col>
+      <Col xs={24} xl={16}>
+        <Row gutter={[24, 24]} className='mt-4 flex-auto xl:ml-4 xl:mt-8'>
+          {Object.values(MOCK_DATA).map((item, index) => (
+            <Col xs={12} key={index} className='flex flex-col'>
+              {item.map((e, i) => (
+                <Flex align='center' justify='space-between' key={i} className='my-1'>
+                  <Badge
+                    color={e.color}
+                    text={<span title={e.name}>{e.name}</span>}
+                    classNames={{
+                      root: 'flex flex-auto items-center pr-2',
+                      indicator: 'shrink-0',
+                    }}
+                  />
+                  <span className='shrink-0'>{e.value}%</span>
+                </Flex>
+              ))}
+            </Col>
           ))}
-        </Flex>
-      </Flex>
-    </Flex>
+        </Row>
+      </Col>
+    </Row>
   );
 };

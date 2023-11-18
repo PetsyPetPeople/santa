@@ -1,6 +1,9 @@
 'use client';
 
-import { Card, Heading } from '@/components';
+import { Card, Heading, Icon, IconName } from '@/components';
+import { dollarUS } from '@/helpers';
+import { useMediaQuery } from '@/hooks';
+import { ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons';
 import { CardProps, Divider, Empty, Flex } from 'antd';
 import Text from 'antd/es/typography/Text';
 import Title from 'antd/es/typography/Title';
@@ -8,9 +11,18 @@ import clsx from 'clsx';
 import { isEmpty } from 'lodash';
 import { Fragment } from 'react';
 
+export enum EInfoCardType {
+  LEAD_STATUS = 'LEAD_STATUS',
+  DURATION = 'DURATION',
+  TOUCH_POINTS = 'TOUCH_POINTS',
+  JOURNEY_COST = 'JOURNEY_COST',
+}
 export interface InfoItem {
   title: string;
   content: string | number;
+  type?: EInfoCardType;
+  value?: string | number;
+  precision?: boolean;
 }
 
 interface InfoCardProps extends CardProps {
@@ -18,28 +30,51 @@ interface InfoCardProps extends CardProps {
 }
 
 export const InfoCard = ({ data, bodyStyle, className, ...props }: InfoCardProps) => {
+  const isDesktop = useMediaQuery(1024);
+
   return (
     <Card
       className={clsx('h-full rounded-[20px]', className)}
-      bodyStyle={{ height: '100%', borderRadius: 20, ...bodyStyle }}
+      bodyStyle={{ height: '100%', borderRadius: 20, padding: 30, paddingBottom: isDesktop ? 30 : 12, ...bodyStyle }}
       {...props}
     >
       <Flex vertical className='h-full'>
         <Heading text='Performance' level={3} />
         <Flex className='align-center flex-auto'>
-          <Flex justify='space-around' align='center' className='w-full px-20'>
+          <Flex justify='space-between' align='center' className='w-full px-20'>
             {isEmpty(data) && <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />}
             {!isEmpty(data) &&
               data.map((item, index) => (
-                <Fragment key={index}>
-                  <Flex vertical align='center'>
-                    <Title level={2} className='mb-1 text-[32px] text-[#353538]'>
-                      {item.title}
-                    </Title>
-                    <Text className='text-base text-[#9494A3]'>{item.content}</Text>
+                <Flex key={index} vertical align='center'>
+                  <Flex align='center' className='mb-3 h-[82px]'>
+                    {item.type !== EInfoCardType.LEAD_STATUS ? (
+                      <Title level={3} className='mb-0 text-[24px] font-light'>
+                        {item.type !== EInfoCardType.JOURNEY_COST ? item.content : dollarUS.format(+item.content)}
+                      </Title>
+                    ) : (
+                      <Icon name={item.content as IconName} width={62} height={82} />
+                    )}
                   </Flex>
-                  {index !== data.length - 1 && <Divider type='vertical' className='h-[70px] border-[#DBDBDB]' />}
-                </Fragment>
+                  <Text className='text-[#9797AC]'>{item.title}</Text>
+
+                  <Divider className='my-2' />
+
+                  <Text className={clsx('text-sm', item.type === EInfoCardType.LEAD_STATUS && 'text-[#30BC70]')}>
+                    {item.type !== EInfoCardType.LEAD_STATUS ? (
+                      <Fragment>
+                        {item.precision ? (
+                          <ArrowUpOutlined style={{ color: '#00AC4F' }} />
+                        ) : (
+                          <ArrowDownOutlined style={{ color: '#F05858' }} />
+                        )}{' '}
+                        / Avg:
+                      </Fragment>
+                    ) : (
+                      ''
+                    )}
+                    {item.type === EInfoCardType.JOURNEY_COST && item.value ? dollarUS.format(+item.value) : item.value}
+                  </Text>
+                </Flex>
               ))}
           </Flex>
         </Flex>

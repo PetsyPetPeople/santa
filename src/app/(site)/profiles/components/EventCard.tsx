@@ -48,7 +48,7 @@ export const EventCard = () => {
     const position = eventItemRef.current[id]!.currentRef?.getBoundingClientRect();
 
     if (position) {
-      const top = Math.ceil(position?.top) - 238 + window.scrollY;
+      const top = Math.ceil(position?.top) - 248 + window.scrollY;
       const left = Math.ceil(position?.left) - 120;
 
       setPosition({ top, left });

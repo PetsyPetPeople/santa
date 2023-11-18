@@ -79,7 +79,7 @@ body {
     }
 
     &::after {
-      top: -13px;
+      top: -12px;
       border-bottom: 12px solid #2d2d31;
     }
   }
@@ -131,4 +131,8 @@ body {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
   touch-action: none;
+}
+
+.ant-badge-status-text {
+  @apply line-clamp-1 flex-auto;
 }
