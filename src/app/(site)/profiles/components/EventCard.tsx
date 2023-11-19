@@ -49,7 +49,7 @@ export const EventCard = () => {
 
     if (position) {
       const top = Math.ceil(position?.top) - 248 + window.scrollY;
-      const left = Math.ceil(position?.left) - 120;
+      const left = Math.ceil(position?.left) - 115;
 
       setPosition({ top, left });
     }

@@ -5,6 +5,7 @@ import { useApp } from '@/hooks';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Card, Form, Input } from 'antd';
+import clsx from 'clsx';
 import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -23,7 +24,11 @@ export const LoginForm = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
-  const { control, handleSubmit } = useForm({
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     defaultValues: { email: '', password: '' },
     resolver: zodResolver(schema),
   });
@@ -56,16 +61,18 @@ export const LoginForm = () => {
         headStyle={{ border: 0 }}
       >
         <Form onFinish={handleSubmit(onSubmit)}>
-          <FormItem name='email' control={control}>
+          <FormItem name='email' control={control} className={clsx(errors?.email && 'mb-8')}>
             <Input
+              size='large'
               type='email'
-              placeholder='Username or email'
+              placeholder='Email'
               disabled={isLoading}
               prefix={<UserOutlined className='site-form-item-icon' />}
             />
           </FormItem>
-          <FormItem name='password' control={control}>
+          <FormItem name='password' control={control} className={clsx(errors?.password && 'mb-8')}>
             <Input
+              size='large'
               type='password'
               placeholder='Password'
               disabled={isLoading}

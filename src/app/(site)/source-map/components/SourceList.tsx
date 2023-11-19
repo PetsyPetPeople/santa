@@ -145,16 +145,15 @@ const EditableCell: React.FC<EditableCellProps> = ({ editing, dataIndex, inputTy
 };
 
 export const SourceList = () => {
-  const { notification } = useApp();
+  const { notification, message } = useApp();
   const [current, setCurrent] = useState(PAGE_CURRENT);
   const [dataSource, setDataSource] = useState<DataType[]>(data);
-  const [count, setCount] = useState(data.length + 1);
+  const [addedId, setAddedId] = useState<string | null>(null);
 
   const [form] = Form.useForm();
   const [editingKey, setEditingKey] = useState('');
-
+  console.log('editingKey :>> ', editingKey);
   const isEditing = (record: DataType) => record.key === editingKey;
-  const isAdding = count > data.length + 1;
 
   const handleEdit = (record: Partial<DataType> & { key: React.Key }) => {
     form.setFieldsValue({ ...record });
@@ -168,13 +167,15 @@ export const SourceList = () => {
 
   const handleCancelAdd = () => {
     setDataSource((prev) => prev.slice(0, prev.length - 1));
-    setCount((prev) => prev - 1);
+    setAddedId(null);
+    setEditingKey('');
     form.resetFields();
   };
 
   const handleAdd = () => {
+    const newId = new Date().getTime().toString();
     const newData: DataType = {
-      key: '',
+      key: newId,
       icon: null,
       platform: '',
       campaignObjective: '',
@@ -190,16 +191,19 @@ export const SourceList = () => {
       costPerClick: 5,
     };
 
+    setEditingKey(newId);
     setDataSource([...dataSource, newData]);
-    setCount(count + 1);
+    setAddedId(newId);
   };
 
   const handleDelete = (key: React.Key) => {
     const newData = dataSource.filter((item) => item.key !== key);
     setDataSource(newData);
+
+    message.success('Deleted successfully!');
   };
 
-  const handleSave = async (key?: React.Key) => {
+  const handleSave = async (isEdit = true, key?: React.Key) => {
     try {
       const row = (await form.validateFields()) as DataType;
 
@@ -213,14 +217,15 @@ export const SourceList = () => {
           ...row,
         });
         setDataSource(newData);
-        setEditingKey('');
       } else {
         newData.push(row);
         setDataSource(newData);
-        setEditingKey('');
       }
 
+      message.success(`${isEdit ? 'Updated' : 'Added'} successfully!`);
       form.resetFields();
+      setEditingKey('');
+      setAddedId(null);
     } catch (errInfo) {
       notification.error({ message: `Validate Failed: ${errInfo}` });
     }
@@ -368,9 +373,9 @@ export const SourceList = () => {
       render: (i: any, record: DataType) => {
         const editable = isEditing(record);
 
-        return editable && !isAdding ? (
+        return editable && !addedId ? (
           <Space>
-            <Button type='link' className='button' onClick={() => handleSave(record.key)}>
+            <Button type='link' className='button' onClick={() => handleSave(true, record.key)}>
               Save
             </Button>
             <Button type='link' className='button' onClick={handleCancel}>
@@ -382,7 +387,7 @@ export const SourceList = () => {
             <Button
               type='link'
               className='button'
-              disabled={isAdding || editingKey !== ''}
+              disabled={!!addedId || editingKey !== ''}
               onClick={() => handleEdit(record)}
             >
               Edit
@@ -397,7 +402,7 @@ export const SourceList = () => {
               cancelButtonProps={{ className: 'text-xs mt-2 w-[60px]' }}
               okButtonProps={{ className: 'text-xs mt-2 w-[60px]' }}
             >
-              <Button type='link' className='button' disabled={isAdding || editingKey !== ''}>
+              <Button type='link' className='button' disabled={!!addedId || editingKey !== ''}>
                 Delete
               </Button>
             </Popconfirm>
@@ -444,21 +449,16 @@ export const SourceList = () => {
           dataSource={getData(current, PAGE_SIZE)}
           footer={() => (
             <Row align='middle' justify='space-between' className='mt-4'>
-              {!isAdding ? (
+              {!addedId ? (
                 <Button type='link' className='button' disabled={editingKey !== ''} onClick={handleAdd}>
                   + Add another source
                 </Button>
               ) : (
                 <Flex gap={8}>
-                  <Button type='link' className='button black w-[140px]'>
+                  <Button type='link' className='button black w-[140px]' onClick={() => handleSave(false, editingKey)}>
                     Save
                   </Button>
-                  <Button
-                    type='link'
-                    disabled={editingKey !== ''}
-                    onClick={handleCancelAdd}
-                    className='button w-[140px]'
-                  >
+                  <Button type='link' onClick={handleCancelAdd} className='button w-[140px]'>
                     Cancel
                   </Button>
                 </Flex>
