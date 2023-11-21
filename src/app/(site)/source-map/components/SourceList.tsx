@@ -15,19 +15,92 @@ import {
   PaginationProps,
   Popconfirm,
   Row,
+  Select,
   Space,
   Table,
   Tooltip,
   Typography,
 } from 'antd';
 import { ColumnsType } from 'antd/es/table';
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 
 const { Title } = Typography;
 
+type Options = { icon: IconName; value: string; label: string };
+
+export const DEFAULT_OPTIONS: Options[] = [
+  {
+    icon: 'logo-affiliate-referrals',
+    value: 'Affiliate Referrals',
+    label: 'Affiliate Referrals',
+  },
+  { icon: 'logo-apple', value: 'App Store (Ads)', label: 'App Store (Ads)' },
+  { icon: 'logo-apple', value: 'App Store (Organic)', label: 'App Store (Organic)' },
+  { icon: 'logo-baidu', value: 'Baidu', label: 'Baidu' },
+  { icon: 'logo-bing', value: 'Bing (Ads)', label: 'Bing (Ads)' },
+  { icon: 'logo-bing', value: 'Bing (Organic)', label: 'Bing (Organic)' },
+  { icon: 'logo-canstar', value: 'Canstar', label: 'Canstar' },
+  { icon: 'logo-canstar', value: 'Canstar (Paid)', label: 'Canstar (Paid)' },
+  { icon: 'logo-cashback-rewards', value: 'Cashback Rewards', label: 'Cashback Rewards' },
+  { icon: 'logo-cat', value: 'Cats Of Australia', label: 'Cats Of Australia' },
+  { icon: 'logo-choice', value: 'Choice', label: 'Choice' },
+  { icon: 'logo-commission-factory', value: 'Commission Factory', label: 'Commission Factory' },
+  { icon: 'logo-compare-market', value: 'Compare the Market', label: 'Compare the Market' },
+  { icon: 'logo-credit-savvy', value: 'Credit Savvy', label: 'Credit Savvy' },
+  { icon: 'logo-deal-spotr', value: 'Deal Spotr', label: 'Deal Spotr' },
+  {
+    icon: 'logo-deutsch-welpenplatz',
+    value: 'Deutsch Welpenplatz',
+    label: 'Deutsch Welpenplatz',
+  },
+  { icon: 'logo-direct-traffic', value: 'Direct Traffic', label: 'Direct Traffic' },
+  { icon: 'logo-display-ads', value: 'Display Ads', label: 'Display Ads' },
+  { icon: 'logo-duck', value: 'DuckDuckGo', label: 'DuckDuckGo' },
+  { icon: 'logo-email', value: 'Email Campaigns', label: 'Email Campaigns' },
+  { icon: 'logo-facebook', value: 'Facebook (Ads)', label: 'Facebook (Ads)' },
+  { icon: 'logo-facebook', value: 'Facebook (Organic)', label: 'Facebook (Organic)' },
+  { icon: 'logo-finder', value: 'Finder', label: 'Finder' },
+  {
+    icon: 'logo-message',
+    value: 'Forums and Community Boards',
+    label: 'Forums and Community Boards',
+  },
+  { icon: 'logo-google', value: 'Google (Ads)', label: 'Google (Ads)' },
+  { icon: 'logo-google', value: 'Google (Organic)', label: 'Google (Organic)' },
+  { icon: 'logo-growthops', value: 'GrowthOps', label: 'GrowthOps' },
+  {
+    icon: 'logo-influencer-marketing',
+    value: 'Influencer Marketing',
+    label: 'Influencer Marketing',
+  },
+  { icon: 'logo-instagram', value: 'Instagram', label: 'Instagram' },
+  { icon: 'logo-klaviyo', value: 'Klaviyo', label: 'Klaviyo' },
+  { icon: 'logo-linkedIn', value: 'LinkedIn (Ads)', label: 'LinkedIn (Ads)' },
+  { icon: 'logo-linkedIn', value: 'LinkedIn (Organic)', label: 'LinkedIn (Organic)' },
+  { icon: 'logo-mailchimp', value: 'Mailchimp', label: 'Mailchimp' },
+  { icon: 'logo-mozo', value: 'Mozo', label: 'Mozo' },
+  { icon: 'logo-pinterest', value: 'Pinterest', label: 'Pinterest' },
+  { icon: 'logo-podcasts', value: 'Podcasts', label: 'Podcasts' },
+  { icon: 'logo-product-review', value: 'Product Review', label: 'Product Review' },
+  { icon: 'logo-qrcode', value: 'QR Codes - Breeders', label: 'QR Codes - Breeders' },
+  { icon: 'logo-qrcode', value: 'QR Codes - Vets', label: 'QR Codes - Vets' },
+  { icon: 'logo-reddit', value: 'Reddit', label: 'Reddit' },
+  { icon: 'logo-rss', value: 'RSS Feeds', label: 'RSS Feeds' },
+  { icon: 'logo-savvy', value: 'Savvy', label: 'Savvy' },
+  { icon: 'logo-snapchat', value: 'Snapchat', label: 'Snapchat' },
+  { icon: 'logo-sms', value: 'SMS Marketing', label: 'SMS Marketing' },
+  { icon: 'logo-tiktok', value: 'TikTok', label: 'TikTok' },
+  { icon: 'logo-pet', value: 'Top10 Pet Insurance', label: 'Top10 Pet Insurance' },
+  { icon: 'logo-trustpilot', value: 'Trustpilot', label: 'Trustpilot' },
+  { icon: 'logo-x', value: 'X (Ads)', label: 'X (Ads)' },
+  { icon: 'logo-x', value: 'X (Organic)', label: 'X (Organic)' },
+  { icon: 'logo-webinars', value: 'Webinars', label: 'Webinars' },
+  { icon: 'logo-yahoo', value: 'Yahoo', label: 'Yahoo' },
+  { icon: 'logo-youtube', value: 'YouTube', label: 'YouTube' },
+];
+
 interface DataType {
   key: string;
-  icon: IconName | null;
   platform: string;
   campaignObjective: string;
   funnelTarget: string;
@@ -45,7 +118,6 @@ interface DataType {
 const data: DataType[] = [
   {
     key: '1',
-    icon: 'logo-canstar',
     platform: 'Canstar',
     campaignObjective: 'Lead',
     funnelTarget: 'TOF',
@@ -61,8 +133,7 @@ const data: DataType[] = [
   },
   {
     key: '2',
-    icon: 'logo-facebook',
-    platform: 'Facebook',
+    platform: 'Facebook (Ads)',
     campaignObjective: 'Nurture',
     funnelTarget: 'BOF',
     source: '',
@@ -77,7 +148,6 @@ const data: DataType[] = [
   },
   {
     key: '3',
-    icon: 'logo-instagram',
     platform: 'Instagram',
     campaignObjective: 'Nurture',
     funnelTarget: 'BOF',
@@ -93,7 +163,6 @@ const data: DataType[] = [
   },
   {
     key: '4',
-    icon: 'logo-finder',
     platform: 'Finder',
     campaignObjective: 'Lead',
     funnelTarget: 'BOF',
@@ -113,30 +182,59 @@ interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
   editing: boolean;
   dataIndex: string;
   title: any;
-  inputType: 'number' | 'text';
+  inputType: 'number' | 'text' | 'select';
   record: DataType;
   index: number;
   children: React.ReactNode;
 }
 
 const EditableCell: React.FC<EditableCellProps> = ({ editing, dataIndex, inputType, children, ...restProps }) => {
-  const inputNode = inputType === 'number' ? <InputNumber /> : <Input />;
+  let inputNode;
+
+  switch (inputType) {
+    case 'select':
+      inputNode = (
+        <Select placeholder='Select Source' style={{ width: 200 }} popupClassName='w-[260px]'>
+          {DEFAULT_OPTIONS.map((item: Options) => (
+            <Select.Option value={item.value} key={item.value} title={item.value}>
+              <Icon name={item.icon} className='mr-2' size='sm' />
+              <span>{item.label}</span>
+            </Select.Option>
+          ))}
+        </Select>
+      );
+      break;
+    case 'number':
+      inputNode = <InputNumber />;
+      break;
+    default:
+      inputNode = <Input />;
+      break;
+  }
 
   return (
     <td {...restProps}>
       {editing ? (
-        <Form.Item
-          name={dataIndex}
-          style={{ margin: 0 }}
-          // rules={[
-          //   {
-          //     required: true,
-          //     message: `Please Input ${title}!`,
-          //   },
-          // ]}
-        >
-          {inputNode}
-        </Form.Item>
+        <Fragment>
+          {dataIndex === 'platform' ? (
+            <Form.Item
+              name={dataIndex}
+              style={{ margin: 0 }}
+              rules={[
+                {
+                  required: true,
+                  message: `Please select source`,
+                },
+              ]}
+            >
+              {inputNode}
+            </Form.Item>
+          ) : (
+            <Form.Item name={dataIndex} style={{ margin: 0 }}>
+              {inputNode}
+            </Form.Item>
+          )}
+        </Fragment>
       ) : (
         children
       )}
@@ -145,14 +243,14 @@ const EditableCell: React.FC<EditableCellProps> = ({ editing, dataIndex, inputTy
 };
 
 export const SourceList = () => {
-  const { notification, message } = useApp();
+  const { message } = useApp();
   const [current, setCurrent] = useState(PAGE_CURRENT);
   const [dataSource, setDataSource] = useState<DataType[]>(data);
   const [addedId, setAddedId] = useState<string | null>(null);
 
   const [form] = Form.useForm();
   const [editingKey, setEditingKey] = useState('');
-  console.log('editingKey :>> ', editingKey);
+
   const isEditing = (record: DataType) => record.key === editingKey;
 
   const handleEdit = (record: Partial<DataType> & { key: React.Key }) => {
@@ -176,7 +274,6 @@ export const SourceList = () => {
     const newId = new Date().getTime().toString();
     const newData: DataType = {
       key: newId,
-      icon: null,
       platform: '',
       campaignObjective: '',
       funnelTarget: '',
@@ -206,6 +303,7 @@ export const SourceList = () => {
   const handleSave = async (isEdit = true, key?: React.Key) => {
     try {
       const row = (await form.validateFields()) as DataType;
+      console.log('row :>> ', row);
 
       const newData = [...dataSource];
       const index = newData.findIndex((item) => key === item.key);
@@ -227,7 +325,7 @@ export const SourceList = () => {
       setEditingKey('');
       setAddedId(null);
     } catch (errInfo) {
-      notification.error({ message: `Validate Failed: ${errInfo}` });
+      console.log('errInfo :>> ', errInfo);
     }
   };
 
@@ -244,15 +342,18 @@ export const SourceList = () => {
       title: 'Platform',
       dataIndex: 'platform',
       key: 'platform',
-      width: 160,
+      width: 240,
       ellipsis: true,
       editable: true,
-      render: (i: any, record: DataType) => (
-        <Flex align='center'>
-          <Icon name={record.icon} className='mr-3 h-[28px] w-[28px]' />
-          <span>{record.platform || ''}</span>
-        </Flex>
-      ),
+      render: (i: any, record: DataType) => {
+        const iconName = DEFAULT_OPTIONS.find((item) => item.value === record.platform)?.icon;
+        return (
+          <Flex align='center'>
+            {!!iconName && <Icon name={iconName} className='mr-3 h-[28px] w-[28px]' />}
+            <span>{record.platform || ''}</span>
+          </Flex>
+        );
+      },
     },
 
     {
@@ -421,7 +522,7 @@ export const SourceList = () => {
       ...col,
       onCell: (record: DataType) => ({
         record,
-        inputType: col.dataIndex === 'age' ? 'number' : 'text',
+        inputType: col.dataIndex === 'costPerClick' ? 'number' : col.dataIndex === 'platform' ? 'select' : 'text',
         dataIndex: col.dataIndex,
         title: col.title,
         editing: isEditing(record),
@@ -432,11 +533,11 @@ export const SourceList = () => {
   return (
     <Card bodyStyle={{ borderRadius: 20 }} className='rounded-[20px] p-6 lg:px-[60px] lg:py-4'>
       <Flex align='center' justify='space-between' className='w-full'>
-        <Title level={3} className='mb-0'>
+        <Title level={3} className='mb-0 font-normal'>
           Source Map
         </Title>
       </Flex>
-      <Divider className='mt-4' />
+      <Divider className='mt-4 bg-[#E5E5EF]' />
       <Form form={form} component={false}>
         <Table
           components={{
@@ -463,7 +564,7 @@ export const SourceList = () => {
                   </Button>
                 </Flex>
               )}
-              <Pagination current={current} total={data.length} pageSize={PAGE_SIZE} onChange={onChange} />
+              <Pagination current={current} total={dataSource.length} pageSize={PAGE_SIZE} onChange={onChange} />
             </Row>
           )}
           pagination={false}

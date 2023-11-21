@@ -30,7 +30,7 @@ export const EventCardItem = forwardRef<EventCardItemRef, EventCardItemProps>(({
       case 'cold':
         return 'bg-[#56A9F5]';
       default:
-        return 'bg-[#9494A3]';
+        return 'bg-[#CDCBDB]';
     }
   };
 
@@ -39,16 +39,15 @@ export const EventCardItem = forwardRef<EventCardItemRef, EventCardItemProps>(({
       <Flex vertical align='center' className='relative h-full'>
         <span className={clsx('absolute top-[34px] z-10 h-[6px] w-[calc(100%-2px)]', classNameActive())} />
         <Icon name={item.id as IconName} size='lg' className='relative z-20' />
-
         <Flex
           id={`event-${index}`}
           ref={currentRef}
           vertical
           align='center'
-          className='popup mt-2 w-[76px] flex-auto px-[6px] py-[10px]'
+          className={clsx('mt-2 min-w-[76px] flex-auto px-2 py-2 sm:min-w-[64px]', item.id && 'popup')}
         >
-          <Text className={clsx('mb-1 text-xl')}>{`$${item.value || '?'}`}</Text>
-          <Text className='text-[13px] text-[#9494A3]'>{item.count ? `Touch ${item.count}` : '...'}</Text>
+          {item.value ? <Text className={clsx('mb-0 text-xl font-normal')}>${item.value}</Text> : <div />}
+          {!!item.count && <Text className='text-[13px] text-[#9494A3]'>Touch {item.count}</Text>}
 
           {!!item.count && (
             <div

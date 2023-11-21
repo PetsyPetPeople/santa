@@ -10,7 +10,7 @@ const { Text } = Typography;
 
 const NiceListSectionDynamic = dynamic(
   async () => import('./components/NiceListSection').then((res) => res.NiceListSection),
-  { ssr: false },
+  { ssr: false, suspense: true },
 );
 
 export default function HomePage() {
@@ -26,6 +26,7 @@ export default function HomePage() {
           suffix='%'
           text='this month'
           className='mb-6 w-full sm:mb-0 sm:w-auto'
+          avatarSize={84}
         />
 
         <Flex vertical>
@@ -34,11 +35,11 @@ export default function HomePage() {
         </Flex>
       </Flex>
 
-      <Statistic className='mb-8 mt-12' />
-
-      <NiceListSectionDynamic />
+      <Statistic className='mt-12' />
 
       <StatisticStatus />
+
+      <NiceListSectionDynamic />
 
       <AttributionCostSection />
 

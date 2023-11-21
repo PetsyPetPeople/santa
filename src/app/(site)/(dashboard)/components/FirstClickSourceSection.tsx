@@ -17,7 +17,7 @@ const PieChartVerticalCard = dynamic(
 export function FirstClickSourceSection() {
   return (
     <Fragment>
-      <Heading text='First Click Source' rootClassName='mb-7 mt-[60px]' />
+      <Heading level={3} text='First Click Source' rootClassName='mb-7 mt-[60px]' />
       <Row gutter={24}>
         <Col xs={24} lg={8} className='mb-6 lg:mb-0'>
           <Card bodyStyle={{ height: '100%', padding: '16px 40px 40px' }}>

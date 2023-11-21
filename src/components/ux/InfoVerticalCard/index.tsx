@@ -1,6 +1,5 @@
 'use client';
 
-import { Icon, IconName } from '@/components';
 import { dollarUS } from '@/helpers';
 import { Avatar, Divider, Flex, Typography } from 'antd';
 import { isNumber } from 'lodash';
@@ -11,17 +10,17 @@ const { Text, Title } = Typography;
 interface InfoVerticalCardProps {
   title: React.ReactNode;
   desc: React.ReactNode;
-  iconName: IconName;
+  icon: React.ReactNode;
   iconBgColor?: string;
   data: InfoItem[];
 }
 
-export function InfoVerticalCard({ title, desc, iconName, iconBgColor, data }: InfoVerticalCardProps) {
+export function InfoVerticalCard({ title, desc, icon, iconBgColor, data }: InfoVerticalCardProps) {
   return (
     <Flex vertical className='vertical-card'>
       <Flex justify='space-between'>
         <Flex vertical className='flex-auto'>
-          <Title level={2} className='mb-0'>
+          <Title level={2} className='mb-0 font-normal'>
             {title}
           </Title>
           <Text className='text'>{desc}</Text>
@@ -30,13 +29,13 @@ export function InfoVerticalCard({ title, desc, iconName, iconBgColor, data }: I
           size={60}
           icon={
             <Flex component='span' align='center' justify='center' className='h-full w-full'>
-              <Icon name={iconName} width={22} height={16} />
+              {icon}
             </Flex>
           }
           style={{ backgroundColor: iconBgColor || '#CDCBDB' }}
         />
       </Flex>
-      <Divider className='my-4 bg-[#D9D9D9]' />
+      <Divider className='my-4 bg-[#E5E5EF]' />
 
       <Flex justify='space-between' className='mb-2'>
         <Text className='text'>Source</Text>

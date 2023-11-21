@@ -4,31 +4,16 @@ import { Card, Heading, Icon } from '@/components';
 import { useClickAway, useDebounceEffect } from 'ahooks';
 import { Flex } from 'antd';
 import { isNull } from 'lodash';
-import { useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { EventCardItemRef, EventItem } from '../types';
 import { EventCardItem } from './EventCardItem';
 import { EventPopup } from './EventPopup';
 
-const data: EventItem[] = [
-  { id: 'instagram', count: 1, value: 100, status: 'hot' },
-  { id: 'google', count: 2, value: 200, status: 'hot' },
-  { id: 'tiktok', count: 2, value: 200, status: 'hot' },
-  { id: 'facebook', count: 2, value: 200, status: 'hot' },
-  { id: 'canstar', count: 2, value: 200, status: 'hot' },
-  { id: 'youtube', count: 2, value: 200, status: 'hot' },
-  { id: 'credit-savvy', count: 2, value: 200, status: 'hot' },
-  { id: 'linked', count: 2, value: 200, status: 'cold' },
-  { id: 'market', count: 2, value: 200, status: 'cold' },
-  { id: 'mozo', count: 2, value: 200, status: 'cold' },
-  { id: 'pet-insurance', count: 2, value: 200, status: 'cold' },
-  { id: 'pinterest', count: 2, value: 200, status: 'cold' },
-  { id: 'product-review', count: 2, value: 200, status: 'cold' },
-  { id: 'savvy', count: 2, value: 200, status: 'cold' },
+interface EventCardProps {
+  data: EventItem[];
+}
 
-  { id: 'unknown', count: null, value: null, status: null },
-];
-
-export const EventCard = () => {
+export const EventCard = ({ data = [] }: EventCardProps) => {
   const [popupId, setPopupId] = useState<number | null>(null);
   const [position, setPosition] = useState({ top: 0, left: 0 });
   const [popupClassName, setPopupClassName] = useState('');
@@ -36,23 +21,37 @@ export const EventCard = () => {
   const popupRef = useRef(null);
   const eventItemRef = useRef<EventCardItemRef[] | null[]>([]);
 
-  const iSuccess = data.every((item) => !isNull(item.count));
-
   useClickAway(() => setPopupId(null), [popupRef, eventItemRef?.current[popupId!]?.buttonRef]);
   useDebounceEffect(() => setPopupClassName(''), [popupId], { wait: 500 });
 
-  const handleOpen = (id: number) => {
-    setPopupId(id);
-    setPopupClassName('open');
+  const iSuccess = useMemo(() => data?.every((item) => !isNull(item.count)), [data]);
 
+  const handleUpdatePopupPosition = (id: number) => {
     const position = eventItemRef.current[id]!.currentRef?.getBoundingClientRect();
 
     if (position) {
       const top = Math.ceil(position?.top) - 248 + window.scrollY;
-      const left = Math.ceil(position?.left) - 115;
+      const left = Math.ceil(position?.left) - 118;
 
       setPosition({ top, left });
     }
+  };
+
+  useEffect(() => {
+    if (!popupId) return;
+
+    const handleResize = () => handleUpdatePopupPosition(popupId);
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, [popupId]);
+
+  const handleOpen = (id: number) => {
+    setPopupId(id);
+    setPopupClassName('open');
+    handleUpdatePopupPosition(id);
   };
 
   const handleWheel = (e: any) => {

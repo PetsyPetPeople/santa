@@ -13,7 +13,8 @@ const rangePresets: TimeRangePickerProps['presets'] = [
   { label: 'Yesterday', value: [dayjs().add(-1, 'd'), dayjs()] },
   { label: 'Last Week', value: [dayjs().add(-7, 'd'), dayjs()] },
   { label: 'Last Month', value: [dayjs().add(-1, 'month'), dayjs()] },
-  { label: 'Last quarter', value: [dayjs().add(-3, 'month'), dayjs()] },
+  { label: 'Last Quarter', value: [dayjs().add(-3, 'month'), dayjs()] },
+  { label: 'Last Year', value: [dayjs().add(-12, 'month'), dayjs()] },
 ];
 
 export const DateRange: React.FC = () => {
@@ -28,7 +29,12 @@ export const DateRange: React.FC = () => {
 
   return (
     <Space direction='vertical' size={12}>
-      <RangePicker presets={rangePresets} onChange={onRangeChange} format='DD-MMM-YY' />
+      <RangePicker
+        presets={rangePresets}
+        defaultValue={[dayjs().add(-1, 'month'), dayjs()]}
+        onChange={onRangeChange}
+        format='DD-MMM-YY'
+      />
     </Space>
   );
 };

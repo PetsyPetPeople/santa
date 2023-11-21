@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, InfoVerticalCard } from '@/components';
+import { Card, Icon, InfoVerticalCard } from '@/components';
 import { useMediaQuery } from '@/hooks';
 import { Flex } from 'antd';
 
@@ -10,14 +10,14 @@ export function NiceListSection() {
   return (
     <Card
       hasBoxShadow={false}
-      className='mt-5 rounded-[20px]'
+      className='mt-8 rounded-[20px]'
       bodyStyle={{ borderRadius: 20, backgroundColor: '#EEEEF5', padding: isDesktop ? 60 : 24 }}
     >
       <Flex wrap='wrap' justify='center' className='gap-8'>
         <InfoVerticalCard
           title='Nice List'
           desc='Top Acquisition Performers'
-          iconName='checked'
+          icon={<Icon name='checked' width={28} height={24} />}
           iconBgColor='#FDDEDE'
           data={[
             { title: 'Facebook', content: 59 },
@@ -29,7 +29,7 @@ export function NiceListSection() {
         <InfoVerticalCard
           title='Naughty List'
           desc='Worst Acquisition Performers'
-          iconName='close'
+          icon={<Icon name='close' width={22} height={22} />}
           data={[
             { title: 'Instagram', content: 59 },
             { title: 'Tik Tok', content: 70 },

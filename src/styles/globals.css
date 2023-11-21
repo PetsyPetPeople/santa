@@ -17,19 +17,27 @@ body {
 }
 
 .button {
-  filter: drop-shadow(0 3px 20px rgba(0, 0, 0, 7%));
   background-color: #f6f6fb !important;
+  border-color: #f6f6fb !important;
   color: #353538 !important;
-  border-color: #e8e7f3 !important;
-  opacity: 1;
-
-  &:hover {
-    opacity: 0.75;
-  }
+  transition: all 0.35s;
 
   &.black {
     background-color: black !important;
     color: white !important;
+    opacity: 1;
+
+    &:hover {
+      opacity: 0.75;
+    }
+  }
+
+  /* stylelint-disable-next-line selector-not-notation */
+  &:not(:disabled):not(.black) {
+    &:hover {
+      background-color: black !important;
+      color: white !important;
+    }
   }
 }
 
@@ -135,4 +143,12 @@ body {
 
 .ant-badge-status-text {
   @apply line-clamp-1 flex-auto;
+}
+
+.ant-select-selection-item {
+  @apply flex items-center;
+}
+
+.ant-select-item-option-content {
+  @apply my-1 flex items-center;
 }

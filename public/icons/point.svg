@@ -1,4 +1,4 @@
-<svg width="88" height="26" viewBox="0 0 88 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-<line y1="13.5" x2="88" y2="13.5" stroke="#CDCBDB" stroke-width="3"/>
-<circle cx="45" cy="13" r="13" fill="#CDCBDB"/>
+<svg width="64" height="26" viewBox="0 0 64 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M2 13H62" stroke="#CDCBDB" stroke-width="3" stroke-linecap="round"/>
+<circle cx="32" cy="13" r="11.5" fill="white" stroke="#CDCBDB" stroke-width="3"/>
 </svg>

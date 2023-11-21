@@ -14,10 +14,10 @@ interface HeadingProps extends TitleProps {
 export function Heading({ level = 2, text, className, rootClassName, ...props }: HeadingProps) {
   return (
     <Flex vertical className={rootClassName}>
-      <Title level={level} className={clsx('mb-0', className)} {...props}>
+      <Title level={level} className={clsx('mb-0 font-normal', className)} {...props}>
         {text}
       </Title>
-      <Divider className='mb-0 mt-3 bg-[#D9D9D9]' />
+      <Divider className='mb-0 mt-3 bg-[#E5E5EF]' />
     </Flex>
   );
 }

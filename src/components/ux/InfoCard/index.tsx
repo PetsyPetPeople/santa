@@ -16,6 +16,7 @@ export enum EInfoCardType {
   DURATION = 'DURATION',
   TOUCH_POINTS = 'TOUCH_POINTS',
   JOURNEY_COST = 'JOURNEY_COST',
+  ROAS = 'ROAS',
 }
 export interface InfoItem {
   title: string;
@@ -41,7 +42,7 @@ export const InfoCard = ({ data, bodyStyle, className, ...props }: InfoCardProps
       <Flex vertical className='h-full'>
         <Heading text='Performance' level={3} />
         <Flex className='align-center flex-auto'>
-          <Flex justify='space-between' align='center' className='w-full px-20'>
+          <Flex justify='space-around' align='center' className='w-full'>
             {isEmpty(data) && <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />}
             {!isEmpty(data) &&
               data.map((item, index) => (
@@ -49,15 +50,19 @@ export const InfoCard = ({ data, bodyStyle, className, ...props }: InfoCardProps
                   <Flex align='center' className='mb-3 h-[82px]'>
                     {item.type !== EInfoCardType.LEAD_STATUS ? (
                       <Title level={3} className='mb-0 text-[24px] font-light'>
-                        {item.type !== EInfoCardType.JOURNEY_COST ? item.content : dollarUS.format(+item.content)}
+                        {item.type === EInfoCardType.JOURNEY_COST || item.type === EInfoCardType.ROAS
+                          ? dollarUS.format(+item.content)
+                          : item.content}
                       </Title>
                     ) : (
                       <Icon name={item.content as IconName} width={62} height={82} />
                     )}
                   </Flex>
-                  <Text className='text-[#9797AC]'>{item.title}</Text>
+                  <Text className='text-[#9797AC]'>
+                    {item.type === EInfoCardType.ROAS ? item.title.toUpperCase() : item.title}
+                  </Text>
 
-                  <Divider className='my-2' />
+                  <Divider className='my-2 bg-[#E5E5EF]' />
 
                   <Text className={clsx('text-sm', item.type === EInfoCardType.LEAD_STATUS && 'text-[#30BC70]')}>
                     {item.type !== EInfoCardType.LEAD_STATUS ? (
@@ -67,12 +72,13 @@ export const InfoCard = ({ data, bodyStyle, className, ...props }: InfoCardProps
                         ) : (
                           <ArrowDownOutlined style={{ color: '#F05858' }} />
                         )}{' '}
-                        / Avg:
+                        / Avg:{' '}
                       </Fragment>
-                    ) : (
-                      ''
-                    )}
-                    {item.type === EInfoCardType.JOURNEY_COST && item.value ? dollarUS.format(+item.value) : item.value}
+                    ) : null}
+
+                    {(item.type === EInfoCardType.JOURNEY_COST || item.type === EInfoCardType.ROAS) && item.value
+                      ? dollarUS.format(+item.value)
+                      : item.value}
                   </Text>
                 </Flex>
               ))}

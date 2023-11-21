@@ -22,6 +22,7 @@ interface StatisticCardProps extends Omit<FlexProps, 'prefix' | 'children'> {
   avatarClassName?: string;
   textClassName?: string;
   hasBg?: boolean;
+  avatarSize?: number;
 }
 
 export const StatisticCard: FC<StatisticCardProps> = ({
@@ -37,6 +38,7 @@ export const StatisticCard: FC<StatisticCardProps> = ({
   avatarClassName = 'bg-[#CDCBDB]',
   textClassName = 'text-xs',
   hasBg = false,
+  avatarSize = 67,
   ...rest
 }) => {
   const renderPrefix = () => {
@@ -51,7 +53,7 @@ export const StatisticCard: FC<StatisticCardProps> = ({
     <Flex {...rest}>
       {hasBg ? (
         <Avatar
-          size={86}
+          size={avatarSize}
           icon={
             (
               <Flex component='span' align='center' justify='center' className='h-full w-full'>
@@ -62,7 +64,7 @@ export const StatisticCard: FC<StatisticCardProps> = ({
           className={clsx(avatarClassName)}
         />
       ) : (
-        <Flex component='span' align='center' justify='center' className='h-[84px] w-[84px]'>
+        <Flex component='span' align='center' justify='center' className='h-[64px] w-[64px]'>
           {icon}
         </Flex>
       )}

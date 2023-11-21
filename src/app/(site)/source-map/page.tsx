@@ -16,8 +16,10 @@ export default function SourceMapPage() {
               title='Total Platforms'
               fontSizeValue={2}
               value={4}
-              icon={<Icon name='platform' className='h-[48px] w-[48px]' />}
-              className='justify-center'
+              icon={<Icon name='platform' className='h-[28px] w-[28px]' />}
+              justify='center'
+              avatarSize={68}
+              align='center'
             />
           </Col>
           <Col xs={24} lg={8} className='lg:border-l'>
@@ -26,10 +28,12 @@ export default function SourceMapPage() {
               title='Cost Per Click'
               fontSizeValue={2}
               value='Low: $5'
-              icon={<Icon name='mouse' className='h-[48px] w-[48px]' />}
+              icon={<Icon name='mouse' className='h-[28px] w-[16px]' />}
               text='High: $7.50'
               textClassName='text-base'
-              className='justify-center'
+              justify='center'
+              avatarSize={68}
+              align='center'
             />
           </Col>
           <Col xs={24} lg={8} className='lg:border-l'>
@@ -38,10 +42,12 @@ export default function SourceMapPage() {
               title='Cost To Land'
               fontSizeValue={2}
               value='Low: $25'
-              icon={<Icon name='user-active' className='h-[48px] w-[48px]' />}
+              icon={<Icon name='user-active' className='h-[30px] w-[22px]' />}
               text='High: $58'
               textClassName='text-base'
-              className='justify-center'
+              justify='center'
+              avatarSize={68}
+              align='center'
             />
           </Col>
         </Row>

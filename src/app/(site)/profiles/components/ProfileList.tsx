@@ -2,9 +2,11 @@
 
 import { Button, Card, Table } from '@/components';
 import { SearchOutlined } from '@ant-design/icons';
+import { useDebounce } from 'ahooks';
 import { Divider, Flex, Input, Select, Space, Typography } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import clsx from 'clsx';
+import { useMemo, useState } from 'react';
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -59,9 +61,11 @@ const columns: ColumnsType<DataType> = [
     dataIndex: 'status',
     key: 'status',
     className: 'font-light',
-    render: (_, record) => (
-      <span className={clsx(record.status === 'Hot' ? 'text-[#F05858]' : 'text-[#56A9F5]')}>{record.status}</span>
-    ),
+    render: (_, record) => {
+      const color =
+        record.status === 'Hot' ? 'text-[#F05858]' : record.status === 'Cold' ? 'text-[#56A9F5]' : 'text-[#30BC70]';
+      return <span className={clsx(color)}>{record.status}</span>;
+    },
   },
 
   {
@@ -79,7 +83,7 @@ const columns: ColumnsType<DataType> = [
   },
 ];
 
-const data: DataType[] = [
+const PROFILE_MOCK_DATA: DataType[] = [
   {
     key: '1',
     leadName: 'Unknown',
@@ -134,7 +138,7 @@ const data: DataType[] = [
     costToDate: 100,
     firstTouchPoint: '5 FEB 2023',
     lastTouchPoint: '10 MAR 2023',
-    status: 'Hot',
+    status: 'Acquired',
   },
   {
     key: '8',
@@ -179,10 +183,17 @@ const data: DataType[] = [
 ];
 
 export const ProfileList = () => {
+  const [search, setSearch] = useState('');
+  const debouncedValue = useDebounce(search, { wait: 700 });
+
+  const filteredData = useMemo(() => {
+    return PROFILE_MOCK_DATA.filter((item) => item.leadName.toLowerCase().includes(debouncedValue.toLowerCase()));
+  }, [debouncedValue]);
+
   return (
     <Card className='p-6 lg:px-[90px] lg:py-[54px]'>
       <Flex align='center' justify='space-between' className='w-full'>
-        <Title level={3} className='mb-0'>
+        <Title level={3} className='mb-0 font-normal'>
           All Leads
         </Title>
         <Space>
@@ -190,14 +201,15 @@ export const ProfileList = () => {
             className='w-[200px] rounded-[10px] bg-white'
             placeholder='Search'
             prefix={<SearchOutlined style={{ fontSize: 20, color: '#7E7E7E' }} />}
+            onChange={(e) => setSearch(e.target.value)}
           />
 
           <Flex align='center' className='rounded-[10px] border pl-3'>
-            <span>Short by:</span>
+            <span>Sort by:</span>
             <Select
               defaultValue='newest'
               bordered={false}
-              popupMatchSelectWidth={120}
+              popupMatchSelectWidth={140}
               placement='bottomRight'
               className='w-[90px]'
             >
@@ -210,8 +222,8 @@ export const ProfileList = () => {
           </Flex>
         </Space>
       </Flex>
-      <Divider className='mt-4' />
-      <Table columns={columns} data={data} />
+      <Divider className='mt-4 bg-[#E5E5EF]' />
+      <Table columns={columns} data={filteredData} />
     </Card>
   );
 };

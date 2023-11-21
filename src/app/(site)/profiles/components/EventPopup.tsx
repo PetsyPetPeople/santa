@@ -34,17 +34,17 @@ export const EventPopup = forwardRef(({ className, position }: EventPopupProps, 
         <Text className='text-[14px] text-[#ffffff]'>Facebook Ads</Text>
         <Text className='text-[14px] text-[#ffffff]'>Campaign 1</Text>
 
-        <Divider className='my-2 border-[#9797AC]' />
+        <Divider className='my-2 border-[#E5E5EF]' />
         <Text className='text-[14px] text-[#9797AC]'>Time Decay:</Text>
         <Text className='text-[14px] text-[#ffffff]'>10 days</Text>
 
-        <Divider className='my-2 border-[#9797AC]' />
+        <Divider className='my-2 border-[#E5E5EF]' />
         <Text className='text-[14px] text-[#9797AC]'>Events:</Text>
         <Text className='text-[14px] text-[#ffffff]'>Site visit: 10 sec</Text>
         <Text className='text-[14px] text-[#ffffff]'>Scroll Depth: 30%</Text>
         <Text className='text-[14px] text-[#ffffff]'>Page Views: 1</Text>
 
-        <Divider className='my-2 border-[#9797AC]' />
+        <Divider className='my-2 border-[#E5E5EF]' />
         <Text className='text-[14px] text-[#9797AC]'>Journey Status:</Text>
         <Text className='text-[14px] text-[#ffffff]'>Soft Leads</Text>
       </Flex>

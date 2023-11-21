@@ -21,7 +21,7 @@ export function PieChartVerticalCard({ id, title, data }: PieChartVerticalCardPr
   return (
     <Flex vertical align='center' className='h-full w-full'>
       <PieChart id={`pie-${id}`} width={250} height={250}>
-        <Pie data={data} stroke='none' innerRadius={50} fill='#8884d8' dataKey='value'>
+        <Pie data={data} stroke='none' innerRadius={50} fill='#8884d8' dataKey='value' startAngle={90} endAngle={540}>
           {data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={entry.color} />
           ))}

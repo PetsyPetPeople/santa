@@ -9,13 +9,14 @@ import { Fragment } from 'react';
 
 const BarChartCard = dynamic(() => import('@/components/ux/BarChartCard').then((res) => res.BarChartCard), {
   ssr: false,
+  suspense: true,
   loading: () => <Loading />,
 });
 
 export function AttributionCostSection() {
   return (
     <Fragment>
-      <Heading text='Attribution Cost' rootClassName='mb-7 mt-[60px]' />
+      <Heading level={3} text='Attribution Cost' rootClassName='mb-7 mt-[60px]' />
       <Row gutter={24}>
         <Col xs={24} lg={8} className='mb-6 lg:mb-0'>
           <Card bodyStyle={{ height: 420 }}>
